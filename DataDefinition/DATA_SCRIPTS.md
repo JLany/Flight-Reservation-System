@@ -1,5 +1,8 @@
 # Flights Database Scripts
 - Please copy any new updates before working with the database on your machine.
+	+ Right click on Flights database
+	+ New Query
+	+ Paste the new script only, and execute all
 - And update this file with any script you wrote to modify or add to the database.
     + (e.g., new stored procedure, alter table, etc.).
 
