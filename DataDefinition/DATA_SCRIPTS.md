@@ -13,4 +13,8 @@ First time use:
 - Name it Flights, and leave every thing as default
 - Click Create
 
-## Yousef Kilany : 5/16/2023
+Naming Conventions:
+- Stored Procedures: sp_tableName_procedureName
+- Tables, Columns, SP Parameters: snake_case
+
+### Yousef Kilany : 5/16/2023
