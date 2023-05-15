@@ -1,5 +1,7 @@
 # Flights Database Scripts
-Please copy any new updates before working with the database on you machine.
+- Please copy any new updates before working with the database on you machine.
+- And update this file with any script you wrote to modify or add to the database.
+    + (e.g., new stored procedure, alter table, etc.).
 
 When you want to check on some table's design: 
 - Go to Databases
