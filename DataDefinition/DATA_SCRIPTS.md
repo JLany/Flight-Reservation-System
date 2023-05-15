@@ -22,7 +22,7 @@ Naming Conventions:
 - Stored Procedures: sp_tableName_procedureName
 - Tables, Columns, SP Parameters: snake_case
 
-### Yousef Kilany : 5/16/2023
+### Yousef Kilany : 5/16/2023 
 ______________________________________________________________________
 create table customer(
 	customer_id int identity primary key,
@@ -33,6 +33,9 @@ create table customer(
 	passport_number varchar(20) not null,
 	phone_number varchar(20) not null
 );
+
+alter table customer
+add password nvarchar(50) not null;
 
 create table aircraft(
 	aircraft_id int identity primary key,
