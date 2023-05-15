@@ -24,6 +24,7 @@ Naming Conventions:
 
 ### Yousef Kilany : 5/16/2023 
 ______________________________________________________________________
+```
 create table customer(
 	customer_id int identity primary key,
 	first_name nvarchar(50) not null,
@@ -78,4 +79,5 @@ create table flight_ticket(
 	on update cascade
 	on delete cascade
 );
+```
 ______________________________________________________________________
