@@ -13,6 +13,5 @@ namespace FlightReservationLibrary.Models
         public CustomerModel Passenger { get; set; }
         public FlightModel Flight { get; set; }
         public FlightClass Class { get; set; }
-        public string SeatNumber { get; set; }
     }
 }
