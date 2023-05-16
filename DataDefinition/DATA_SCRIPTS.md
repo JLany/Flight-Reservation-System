@@ -21,7 +21,7 @@ First time use:
 Naming Conventions:
 - Stored Procedures: sp_tableName_procedureName
 - Tables, Columns, SP Parameters: snake_case
-- Airports: RUH, CAI, etc.
+- Airports: Riyadh, Cairo, Dubai, etc.
 
 ### Yousef Kilany : 5/16/2023 
 ______________________________________________________________________
