@@ -13,12 +13,9 @@ namespace FlightReservationLibrary.Models
         public string MiddleName { get; set; }
         public string LastName { get; set; }
         public string EmailAddress { get; set; }
-        public DateTime DateOfBirth { get; set; }
-        public Sex Sex { get; set; }
         public string PassportNumber { get; set; }
-        public string Nationality { get; set; }
         public string PhoneNumber { get; set; }
-
         public string FullName { get => $"{FirstName} {MiddleName} {LastName}"; }
+        public string Password { private get; set; }
     }
 }
