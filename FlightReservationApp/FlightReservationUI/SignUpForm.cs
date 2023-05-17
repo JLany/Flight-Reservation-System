@@ -40,6 +40,13 @@ namespace FlightReservationUI
                 Password = passwordTextBox.Text
             };
 
+            if (GlobalConfig.Connector.CheckCustomer_EmailExists(customer.EmailAddress))
+            {
+                // TODO - Show error message for the user
+
+                return;
+            }
+
             customer = GlobalConfig.Connector.CreateCustomer(customer);
 
             ResetSignUpForm();
@@ -51,10 +58,6 @@ namespace FlightReservationUI
         {
             // TODO - Implement the actual validation 
             
-            if (GlobalConfig.Connector.CheckCustomer_EmailExists(emailTextBox.Text))
-            {
-                return false;
-            }
 
             return true;
         }
