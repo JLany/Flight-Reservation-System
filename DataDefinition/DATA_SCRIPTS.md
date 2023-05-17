@@ -82,3 +82,56 @@ create table flight_ticket(
 );
 ```
 ______________________________________________________________________
+
+### Yousef Kilany : 5/17/2023
+______________________________________________________________________
+```
+CREATE PROCEDURE sp_customer_insert
+	@first_name nvarchar(50),
+	@middle_name nvarchar(50),
+	@last_name nvarchar(50),
+	@email nvarchar(50),
+	@passport_number varchar(20),
+	@phone_number varchar(20),
+	@password nvarchar(50),
+	@customer_id int = 0 output
+
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	insert into customer 
+	values(@first_name, @middle_name, @last_name, @email, 
+	@passport_number, @phone_number, @password);
+
+	select @customer_id = SCOPE_IDENTITY();
+END
+GO
+
+
+CREATE PROCEDURE sp_customer_check_email_exists 
+	@email nvarchar(50)
+	
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	declare @exists bit;
+
+	if exists (
+		select 1 from customer 
+		where @email = customer.email
+	) 
+		set @exists = 1;
+	else
+		set @exists = 0;
+
+	select @exists as EmailExists;
+    
+END
+GO
+
+```
+______________________________________________________________________
