@@ -133,5 +133,33 @@ BEGIN
 END
 GO
 
+
+
+CREATE PROCEDURE sp_global_authenticate_user
+	@email nvarchar(50),
+	@password nvarchar(50)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	declare @authenticated bit;
+
+	if exists (
+		select * from customer
+		where email = @email 
+			and customer.password = @password)
+
+		set @authenticated = 1;
+
+	else 
+		set @authenticated = 0;
+
+	select @authenticated as UserAuthenticated
+
+END
+GO
+
 ```
 ______________________________________________________________________
