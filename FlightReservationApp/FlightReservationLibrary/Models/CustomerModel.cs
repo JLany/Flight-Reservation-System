@@ -16,6 +16,6 @@ namespace FlightReservationLibrary.Models
         public string PassportNumber { get; set; }
         public string PhoneNumber { get; set; }
         public string FullName { get => $"{FirstName} {MiddleName} {LastName}"; }
-        public string Password { private get; set; }
+        public string Password { get; set; }
     }
 }

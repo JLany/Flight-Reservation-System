@@ -1,3 +1,5 @@
+using FlightReservationLibrary;
+
 namespace FlightReservationUI
 {
     internal static class Program
@@ -11,7 +13,10 @@ namespace FlightReservationUI
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new TicketsDashboardForm());
+
+            GlobalConfig.InitializeConnector();
+
+            Application.Run(new SignUpForm());
         }
     }
 }
