@@ -34,13 +34,13 @@ namespace FlightReservationUI
                 FirstName = firstNameTextBox.Text,
                 MiddleName = middleNameTextBox.Text,
                 LastName = lastNameTextBox.Text,
-                EmailAddress = emailTextBox.Text,
+                Email = emailTextBox.Text,
                 PassportNumber = passportNumberTextBox.Text,
                 PhoneNumber = phoneNumberTextBox.Text,
                 Password = passwordTextBox.Text
             };
 
-            if (GlobalConfig.Connector.CheckCustomer_EmailExists(customer.EmailAddress))
+            if (GlobalConfig.Connector.CheckCustomer_EmailExists(customer.Email))
             {
                 // TODO - Show error message for the user
 
@@ -58,7 +58,6 @@ namespace FlightReservationUI
         {
             // TODO - Implement the actual validation 
             
-
             return true;
         }
 
