@@ -48,11 +48,11 @@
             arrivalTimeLabel = new Label();
             departureTimeText = new Label();
             departureTimeLabel = new Label();
-            classTextBox = new TextBox();
             ticketNumberTextBox = new TextBox();
             classLabel = new Label();
             ticketNumberLabel = new Label();
             bookNewTicketButton = new Button();
+            classComboBox = new ComboBox();
             ticketDetailsGroupBox.SuspendLayout();
             flightGroupBox.SuspendLayout();
             SuspendLayout();
@@ -90,9 +90,9 @@
             // 
             // ticketDetailsGroupBox
             // 
+            ticketDetailsGroupBox.Controls.Add(classComboBox);
             ticketDetailsGroupBox.Controls.Add(cancelTicketButton);
             ticketDetailsGroupBox.Controls.Add(flightGroupBox);
-            ticketDetailsGroupBox.Controls.Add(classTextBox);
             ticketDetailsGroupBox.Controls.Add(ticketNumberTextBox);
             ticketDetailsGroupBox.Controls.Add(classLabel);
             ticketDetailsGroupBox.Controls.Add(ticketNumberLabel);
@@ -266,15 +266,6 @@
             departureTimeLabel.TabIndex = 0;
             departureTimeLabel.Text = "Departure Time:";
             // 
-            // classTextBox
-            // 
-            classTextBox.BorderStyle = BorderStyle.FixedSingle;
-            classTextBox.Enabled = false;
-            classTextBox.Location = new Point(196, 117);
-            classTextBox.Name = "classTextBox";
-            classTextBox.Size = new Size(185, 35);
-            classTextBox.TabIndex = 22;
-            // 
             // ticketNumberTextBox
             // 
             ticketNumberTextBox.BorderStyle = BorderStyle.FixedSingle;
@@ -314,6 +305,16 @@
             bookNewTicketButton.Text = "Book a New Ticket";
             bookNewTicketButton.UseVisualStyleBackColor = false;
             // 
+            // classComboBox
+            // 
+            classComboBox.Enabled = false;
+            classComboBox.FlatStyle = FlatStyle.System;
+            classComboBox.FormattingEnabled = true;
+            classComboBox.Location = new Point(196, 116);
+            classComboBox.Name = "classComboBox";
+            classComboBox.Size = new Size(185, 38);
+            classComboBox.TabIndex = 27;
+            // 
             // TicketsDashboardForm
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
@@ -347,7 +348,6 @@
         private Button cancelTicketButton;
         private Label classLabel;
         private Label ticketNumberLabel;
-        private TextBox classTextBox;
         private TextBox ticketNumberTextBox;
         private GroupBox flightGroupBox;
         private Label arrivalTimeText;
@@ -364,5 +364,6 @@
         private Label originLabel;
         private Label tripDurationText;
         private Label tripDurationLabel;
+        private ComboBox classComboBox;
     }
 }

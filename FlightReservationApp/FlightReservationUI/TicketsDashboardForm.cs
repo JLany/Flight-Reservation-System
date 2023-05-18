@@ -56,7 +56,7 @@ namespace FlightReservationUI
             ticketDetailsGroupBox.Enabled = true;
 
             ticketNumberTextBox.Text = ticket.TicketNumber;
-            classTextBox.Text = ticket.FlightClass.ToString();
+            classComboBox.Text = ticket.FlightClass.ToString();
 
             WireUpFlightDeatils(ticket.Flight);
         }
