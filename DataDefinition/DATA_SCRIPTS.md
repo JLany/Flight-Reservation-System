@@ -19,64 +19,61 @@ First time use:
 - Click Create
 
 Naming Conventions:
-- Stored Procedures: sp_tableName_procedureName
-- Tables, Columns, SP Parameters: snake_case
-- Airports: Riyadh, Cairo, Dubai, etc.
+- Stored Procedures: spTableName_Operation
+- Tables, Columns, SP Parameters: PascalCase (e.g., FlightTicket)
+- Airports: RUH, CAI, DUB, etc.
 
 ### Yousef Kilany : 5/16/2023 
 ______________________________________________________________________
 ```
-create table customer(
-	customer_id int identity primary key,
-	first_name nvarchar(50) not null,
-	middle_name nvarchar(50) not null,
-	last_name nvarchar(50) not null,
-	email nvarchar(50) not null,
-	passport_number varchar(20) not null,
-	phone_number varchar(20) not null
+create table Customer(
+	Id int identity primary key,
+	FirstName nvarchar(50) not null,
+	MiddleName nvarchar(50) not null,
+	LastName nvarchar(50) not null,
+	Email nvarchar(100) not null,
+	PassportNumber varchar(20) not null,
+	PhoneNumber varchar(20) not null,
+	Password nvarchar(100) not null
 );
 
-alter table customer
-add password nvarchar(50) not null;
-
-create table aircraft(
-	aircraft_id int identity primary key,
-	serial_number varchar(20) unique not null,
-	model_name varchar(50) not null,
-	number_of_seats int not null
+create table Aircraft(
+	Id int identity primary key,
+	SerialNumber varchar(20) unique not null,
+	ModelName varchar(50) not null,
+	NumberOfSeats int not null
 );
 
 create table flight(
-	flight_id int identity primary key,
-	flight_number varchar(20) unique not null,
-	origin_airport varchar(10) not null,
-	destination_airport varchar(10) not null,
-	departure_time datetime2 not null,
-	arrival_time datetime2 not null,
-	trip_duration decimal(6, 2) not null,
-	cost money not null,
-	aircraft_id int,
-	business_class_seats int not null,
-	economy_class_seats int not null,
+	Id int identity primary key,
+	FlightNumber varchar(20) unique not null,
+	OriginAirport varchar(10) not null,
+	DestinationAirport varchar(10) not null,
+	DepartureTime datetime2 not null,
+	ArrivalTime datetime2 not null,
+	TripDuration decimal(6, 2) not null,
+	Cost money not null,
+	AircraftId int,
+	BusinessClassSeats int not null,
+	EconomyClassSeats int not null,
 
-	foreign key (aircraft_id) references aircraft(aircraft_id)
+	foreign key (AircraftId) references Aircraft(Id)
 	on update cascade
 	on delete set null
 );
 
-create table flight_ticket(
-	flight_ticket_id int identity primary key,
-	ticket_number varchar(20) not null,
-	passenger_id int not null,
-	flight_id int not null,
-	flight_class nvarchar(20) not null,
-	seat_number varchar(10) not null,
+create table FlightTicket(
+	Id int identity primary key,
+	TicketNumber varchar(20) not null,
+	CustomerId int not null,
+	FlightId int not null,
+	FlightClass int not null,
 	
-	foreign key (passenger_id) references customer(customer_id)
+	foreign key (CustomerId) references Customer(CustomerId)
 	on update cascade
 	on delete cascade,
 
-	foreign key (flight_id) references flight(flight_id)
+	foreign key (FlightId) references Flight(Id)
 	on update cascade
 	on delete cascade
 );
@@ -87,15 +84,15 @@ ______________________________________________________________________
 ### Yousef Kilany : 5/17/2023
 ______________________________________________________________________
 ```
-CREATE PROCEDURE sp_customer_insert
-	@first_name nvarchar(50),
-	@middle_name nvarchar(50),
-	@last_name nvarchar(50),
-	@email nvarchar(50),
-	@passport_number varchar(20),
-	@phone_number varchar(20),
-	@password nvarchar(50),
-	@customer_id int = 0 output
+CREATE PROCEDURE spCustomer_Insert
+	@FirstName nvarchar(50),
+	@MiddleName nvarchar(50),
+	@LastName nvarchar(50),
+	@Email nvarchar(100),
+	@PassportNumber varchar(20),
+	@PhoneNumber varchar(20),
+	@Password nvarchar(100), 
+	@Id int = 0 output
 
 AS
 BEGIN
@@ -103,16 +100,16 @@ BEGIN
 	SET NOCOUNT ON;
 
 	insert into customer 
-	values(@first_name, @middle_name, @last_name, @email, 
-	@passport_number, @phone_number, @password);
+	values(@FirstName, @MiddleName, @LastName, @Email,
+	@PassportNumber, @PhoneNumber, @Password);
 
-	select @customer_id = SCOPE_IDENTITY();
+	select @Id = SCOPE_IDENTITY();
 END
 GO
 
 
-CREATE PROCEDURE sp_customer_check_email_exists 
-	@email nvarchar(50)
+CREATE PROCEDURE spCustomer_CheckEmailExists
+	@Email nvarchar(100)
 	
 AS
 BEGIN
@@ -122,8 +119,8 @@ BEGIN
 	declare @exists bit;
 
 	if exists (
-		select 1 from customer 
-		where @email = customer.email
+		select 1 from Customer 
+		where @Email = Customer.Eamil
 	) 
 		set @exists = 1;
 	else
@@ -136,28 +133,28 @@ GO
 
 
 
-CREATE PROCEDURE sp_global_authenticate_user
-	@email nvarchar(50),
-	@password nvarchar(50)
+CREATE PROCEDURE spCustomer_Authenticate
+	@Eamil nvarchar(100),
+	@Password nvarchar(100)
 
 AS
 BEGIN
 
 	SET NOCOUNT ON;
 
-	declare @authenticated bit;
+	declare @Authenticated bit;
 
 	if exists (
-		select * from customer
+		select * from Customer
 		where email = @email 
-			and customer.password = @password)
+			and Customer.Password = @Password)
 
-		set @authenticated = 1;
+		set @Authenticated = 1;
 
 	else 
-		set @authenticated = 0;
+		set @Authenticated = 0;
 
-	select @authenticated as UserAuthenticated
+	select @Authenticated as UserAuthenticated
 
 END
 GO
@@ -169,12 +166,9 @@ ______________________________________________________________________
 ______________________________________________________________________
 
 ```
-alter table flight
-drop column seat_number
 
-
-CREATE PROCEDURE sp_flight_get_by_flight_ticket_id
-	@flight_ticket_id int
+CREATE PROCEDURE spFlight_GetByFlightTicketId
+	@FlightTicketId int
 
 AS
 BEGIN
@@ -182,20 +176,17 @@ BEGIN
 	SET NOCOUNT ON;
 	
 	select f.* 
-	from flight as f
-	inner join flight_ticket as t 
-		on t.flight_id = f.flight_id
-	where @flight_ticket_id = t.flight_ticket_id
+	from Flight as f
+	inner join FlightTicket as t 
+		on t.FlightId = f.Id
+	where @FlightTicketId = t.Id
 
 END
 GO
 
 
-
-
-
-CREATE PROCEDURE sp_flight_ticket_get_by_customer_id
-	@customer_id int
+CREATE PROCEDURE spFlightTicket_GetByCustomerId
+	@CustomerId int
 
 AS
 BEGIN
@@ -203,16 +194,16 @@ BEGIN
 	SET NOCOUNT ON;
 
 	select * 
-	from flight_ticket
-	where passenger_id = @customer_id;
+	from FlightTicket
+	where CustomerId = @CustomerId;
 
 END
 GO
 
 
 
-CREATE PROCEDURE sp_customer_get_by_email
-	@email nvarchar(50)
+CREATE PROCEDURE spCustomer_GetByEmail
+	@Email nvarchar(100)
 
 AS
 BEGIN
@@ -220,8 +211,8 @@ BEGIN
 	SET NOCOUNT ON;
 
 	select * 
-	from customer
-	where email = @email;
+	from Customer
+	where Email = @Email;
 END
 GO
 
