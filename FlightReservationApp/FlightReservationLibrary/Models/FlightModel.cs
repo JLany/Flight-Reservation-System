@@ -19,5 +19,11 @@ namespace FlightReservationLibrary.Models
         public AircaftModel Aircaft { get; set; }
         public int BusinessClassSeats { get; set; }
         public int EconomyClassSeats { get; set; }
+
+        public string TripDurationString
+        {
+            get => $"{((int)TripDuration > 0 ? $"{(int)TripDuration} hour(s)" : "")} " +
+                $"{(TripDuration % ((int)TripDuration) > 0 ? $"{TripDuration % 60} minute(s)" : "")}";
+        }
     }
 }

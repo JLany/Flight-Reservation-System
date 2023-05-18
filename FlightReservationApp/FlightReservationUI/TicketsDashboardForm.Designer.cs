@@ -96,7 +96,6 @@
             ticketDetailsGroupBox.Controls.Add(ticketNumberTextBox);
             ticketDetailsGroupBox.Controls.Add(classLabel);
             ticketDetailsGroupBox.Controls.Add(ticketNumberLabel);
-            ticketDetailsGroupBox.Enabled = false;
             ticketDetailsGroupBox.Font = new Font("Segoe UI Semibold", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
             ticketDetailsGroupBox.Location = new Point(389, 121);
             ticketDetailsGroupBox.Name = "ticketDetailsGroupBox";

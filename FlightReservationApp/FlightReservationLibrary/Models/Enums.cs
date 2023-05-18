@@ -14,7 +14,7 @@ namespace FlightReservationLibrary.Models
 
     public enum FlightClass
     {
-        Business,
-        Economy
+        Business = 0,
+        Economy = 1,
     }
 }
