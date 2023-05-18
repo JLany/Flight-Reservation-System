@@ -171,4 +171,58 @@ ______________________________________________________________________
 ```
 alter table flight
 drop column seat_number
+
+
+CREATE PROCEDURE sp_flight_get_by_flight_ticket_id
+	@flight_ticket_id int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+	
+	select f.* 
+	from flight as f
+	inner join flight_ticket as t 
+		on t.flight_id = f.flight_id
+	where @flight_ticket_id = t.flight_ticket_id
+
+END
+GO
+
+
+
+
+
+CREATE PROCEDURE sp_flight_ticket_get_by_customer_id
+	@customer_id int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	select * 
+	from flight_ticket
+	where passenger_id = @customer_id;
+
+END
+GO
+
+
+
+CREATE PROCEDURE sp_customer_get_by_email
+	@email nvarchar(50)
+
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	select * 
+	from customer
+	where email = @email;
+END
+GO
+
 ```
