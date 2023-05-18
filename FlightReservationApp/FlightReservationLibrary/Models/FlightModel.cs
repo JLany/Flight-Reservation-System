@@ -23,7 +23,13 @@ namespace FlightReservationLibrary.Models
         public string TripDurationString
         {
             get => $"{((int)TripDuration > 0 ? $"{(int)TripDuration} hour(s)" : "")} " +
-                $"{(TripDuration % ((int)TripDuration) > 0 ? $"{TripDuration % 60} minute(s)" : "")}";
+                $"{(TripDuration % ((int)TripDuration) > 0 ? $"{CalculateMinutes(TripDuration)} minute(s)" : "")}";
+        }
+
+        private int CalculateMinutes(double duration)
+        {
+            int minutes = (int)((int)(TripDuration * 100) % 100 / 100.0 * 60);
+            return minutes;
         }
     }
 }
