@@ -12,6 +12,11 @@ namespace FlightReservationLibrary.Models
         public string TicketNumber { get; set; }
         public CustomerModel Passenger { get; set; }
         public FlightModel Flight { get; set; }
-        public FlightClass Class { get; set; }
+        public FlightClass FlightClass { get; set; }
+
+        public string Summary
+        {
+            get => $"{TicketNumber} - {Flight.DestinationAirport}";
+        }
     }
 }
