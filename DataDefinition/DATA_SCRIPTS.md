@@ -99,7 +99,7 @@ BEGIN
 	
 	SET NOCOUNT ON;
 
-	insert into customer 
+	insert into Customer 
 	values(@FirstName, @MiddleName, @LastName, @Email,
 	@PassportNumber, @PhoneNumber, @Password);
 
@@ -120,7 +120,7 @@ BEGIN
 
 	if exists (
 		select 1 from Customer 
-		where @Email = Customer.Eamil
+		where @Email = Customer.Email
 	) 
 		set @exists = 1;
 	else
@@ -134,7 +134,7 @@ GO
 
 
 CREATE PROCEDURE spCustomer_Authenticate
-	@Eamil nvarchar(100),
+	@Email nvarchar(100),
 	@Password nvarchar(100)
 
 AS
@@ -146,7 +146,7 @@ BEGIN
 
 	if exists (
 		select * from Customer
-		where email = @email 
+		where Email = @Email 
 			and Customer.Password = @Password)
 
 		set @Authenticated = 1;
@@ -158,6 +158,8 @@ BEGIN
 
 END
 GO
+
+
 
 ```
 ______________________________________________________________________
