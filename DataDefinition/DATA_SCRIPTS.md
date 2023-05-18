@@ -44,7 +44,7 @@ create table Aircraft(
 	NumberOfSeats int not null
 );
 
-create table flight(
+create table Flight(
 	Id int identity primary key,
 	FlightNumber varchar(20) unique not null,
 	OriginAirport varchar(10) not null,
@@ -69,7 +69,7 @@ create table FlightTicket(
 	FlightId int not null,
 	FlightClass int not null,
 	
-	foreign key (CustomerId) references Customer(CustomerId)
+	foreign key (CustomerId) references Customer(Id)
 	on update cascade
 	on delete cascade,
 
