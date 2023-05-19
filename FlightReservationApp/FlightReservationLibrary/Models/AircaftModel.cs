@@ -12,5 +12,10 @@ namespace FlightReservationLibrary.Models
         public string SerialNumber { get; set; }
         public string ModelName { get; set; }
         public int NumberOfSeats { get; set; } 
+        public string ModelData
+        {
+            get => $"{ModelName} - {NumberOfSeats} Seats";
+        }
     }
+
 }
