@@ -300,4 +300,29 @@ END
 GO
 
 
+
+
+
+CREATE PROCEDURE spFlightTicket_Insert
+	@TicketNumber varchar(20),
+	@CustomerId int,
+	@FlightId int,
+	@FlightClass int,
+	@Id int = 0 output
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	insert into FlightTicket
+	values(@TicketNumber, @CustomerId, @FlightId, @FlightClass);
+
+	select @Id = SCOPE_IDENTITY();
+
+END
+GO
+
+
+
 ```
