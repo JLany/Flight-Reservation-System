@@ -252,4 +252,25 @@ GO
 
 
 
+
+CREATE PROCEDURE spFlight_GetByDateOriginDestination
+    @StartDatetime datetime2,
+    @EndDatetime datetime2,
+    @OriginAirport varchar(10),
+    @DestinationAirport varchar(10)
+
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT *
+    FROM Flight
+    WHERE Flight.OriginAirport = @OriginAirport AND Flight.DestinationAirport = @DestinationAirport AND Flight.DepartureTime >= @StartDatetime
+    AND Flight.ArrivalTime <= @EndDatetime;
+
+    RETURN;
+END
+GO
+
+
 ```
