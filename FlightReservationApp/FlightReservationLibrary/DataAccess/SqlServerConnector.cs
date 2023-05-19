@@ -201,5 +201,68 @@ namespace FlightReservationLibrary.DataAccess
             // return new model
             return model;
         }
+        /*
+            public int Id { get; set; }
+            public string FlightNumber { get; set; }
+            public string OriginAirport { get; set; }
+            public string DestinationAirport { get; set; }
+            public DateTime DepartureTime { get; set; }
+            public DateTime ArrivalTime { get; set; }
+            public double TripDuration { get; set; }
+            public decimal Cost { get; set; }
+            public AircaftModel Aircaft { get; set; }
+            public int BusinessClassSeats { get; set; }
+            public int EconomyClassSeats { get; set; }
+        */
+        public FlightModel CreateFlight(FlightModel model)
+        {
+            // open a connection
+            using (IDbConnection connection =
+                new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                var parameters = new DynamicParameters();
+
+                parameters.Add("@FlightNumber", model.FlightNumber);
+                parameters.Add("@OriginAirport", model.OriginAirport);
+                parameters.Add("@DestinationAirport", model.DestinationAirport);
+                parameters.Add("@DepartureTime", model.DepartureTime);
+                parameters.Add("@ArrivalTime", model.ArrivalTime);
+                parameters.Add("@TripDuration", model.TripDuration);
+                parameters.Add("@Cost", model.Cost);
+                parameters.Add("@AircraftId", model.Aircaft.Id);
+                parameters.Add("@BusinessClassSeats", model.BusinessClassSeats);
+                parameters.Add("@EconomyClassSeats", model.EconomyClassSeats);
+
+                parameters.Add("@Id", null, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                // store, and aquire the new id
+                connection.Execute("dbo.spFlight_Insert", parameters, commandType: CommandType.StoredProcedure);
+
+                model.Id = parameters.Get<int>("Id");
+            }
+
+            // return new model
+            return model;
+        }
+
+        public List<AircaftModel> GetAircafts_ByDate(DateTime departureTime, DateTime arrivalTime)
+        {
+            List<AircaftModel> availableAircrafts = new List<AircaftModel>();
+
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@DepartureTime", departureTime);
+                parameters.Add("@ArrivalTime", arrivalTime);
+
+                availableAircrafts = connection.Query<AircaftModel>(
+                    "dbo.spAircraft_GetByDate",
+                    parameters,
+                    commandType: CommandType.StoredProcedure).ToList();
+            }
+
+            return availableAircrafts;
+
+        }
     }
 }
