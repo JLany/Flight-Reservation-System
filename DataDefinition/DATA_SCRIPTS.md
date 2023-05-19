@@ -219,3 +219,37 @@ END
 GO
 
 ```
+
+
+### Yousef Kilany : 5/19/2023 
+______________________________________________________________________
+```
+
+CREATE PROCEDURE spFlight_GetAllOrigins
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+    
+    SELECT DISTINCT OriginAirport AS OriginAirports
+    FROM Flight;
+ 
+END
+GO
+
+
+CREATE PROCEDURE spFlight_GetAllDestinations
+AS
+BEGIN
+
+    SET NOCOUNT ON;
+
+    SELECT DISTINCT DestinationAirport AS DestinationAirports
+    FROM Flight;
+
+END
+GO
+
+
+
+```
