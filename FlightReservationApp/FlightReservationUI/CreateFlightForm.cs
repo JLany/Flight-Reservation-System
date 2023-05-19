@@ -16,5 +16,10 @@ namespace FlightReservationUI
         {
             InitializeComponent();
         }
+
+        private void addFlightButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

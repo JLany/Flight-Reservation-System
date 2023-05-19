@@ -177,5 +177,29 @@ namespace FlightReservationLibrary.DataAccess
 
             return output;
         }
+
+        public AircaftModel CreateAircraft(AircaftModel model)
+        {
+            // open a connection
+            using (IDbConnection connection =
+                new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                var parameters = new DynamicParameters();
+
+                parameters.Add("@SerialNumber", model.SerialNumber);
+                parameters.Add("@ModelName", model.ModelName);
+                parameters.Add("@NumberOfSeats", model.NumberOfSeats);
+
+                parameters.Add("@Id", null, dbType: DbType.Int32, direction: ParameterDirection.Output);
+
+                // store, and aquire the new id
+                connection.Execute("dbo.spAircraft_Insert", parameters, commandType: CommandType.StoredProcedure);
+
+                model.Id = parameters.Get<int>("Id");
+            }
+
+            // return new model
+            return model;
+        }
     }
 }
