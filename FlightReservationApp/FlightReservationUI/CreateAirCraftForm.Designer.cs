@@ -110,6 +110,7 @@
             addAircraftButton.TabIndex = 17;
             addAircraftButton.Text = "Add Aircraft";
             addAircraftButton.UseVisualStyleBackColor = false;
+            addAircraftButton.Click += addAircraftButton_Click;
             // 
             // CreateAirCraftForm
             // 
