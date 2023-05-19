@@ -100,15 +100,6 @@ namespace FlightReservationLibrary.DataAccess
             return output;
         }
 
-        public CustomerModel GetCustomer_ByTicket(FlightTicketModel ticket)
-        {
-            var customer = new CustomerModel();
-
-            // TODO - Implement customer retreival from database
-
-            return customer;
-        }
-
         public AircaftModel GetAircraft_ByFlight(FlightModel flight)
         {
             AircaftModel aircraft;
@@ -140,7 +131,12 @@ namespace FlightReservationLibrary.DataAccess
                 flight = connection.Query<FlightModel>("dbo.spFlight_GetByFlightTicketId"
                 , parameters, commandType: CommandType.StoredProcedure).First();
 
-                flight.Aircaft = GetAircraft_ByFlight(flight);
+                flight.Aircaft = connection.Query<AircaftModel>(
+                    "SELECT a.*" +
+                    " FROM Aircraft a" +
+                    " INNER JOIN Flight f ON a.Id = f.AircraftId" +
+                    " AND f.Id = @FlightId"
+                    , new { FlightId = flight.Id }).First();
             }
 
             return flight;
@@ -162,8 +158,20 @@ namespace FlightReservationLibrary.DataAccess
 
                 foreach (var ticket in output)
                 {
-                    ticket.Flight = GetFlight_ByTicket(ticket);
-                    ticket.Passenger = GetCustomer_ByTicket(ticket);
+                    parameters = new DynamicParameters();
+                    parameters.Add("@FlightTicketId", ticket.Id);
+
+                    ticket.Flight = connection.Query<FlightModel>("dbo.spFlight_GetByFlightTicketId"
+                    , parameters, commandType: CommandType.StoredProcedure).First();
+
+                    ticket.Flight.Aircaft = connection.Query<AircaftModel>(
+                    "SELECT a.*" +
+                    " FROM Aircraft a" +
+                    " INNER JOIN Flight f ON a.Id = f.AircraftId" +
+                    " AND f.Id = @FlightId"
+                    , new { FlightId = ticket.Flight.Id }).First();
+
+                    ticket.Passenger = customer;
                 }
             }
 
