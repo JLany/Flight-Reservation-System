@@ -219,3 +219,27 @@ END
 GO
 
 ```
+### Shehab Diab : 5/19/2023
+______________________________________________________________________
+
+```
+
+CREATE PROCEDURE spAircraft_Insert
+	@SerialNumber varchar(20),
+	@ModelName varchar(50),
+	@NumberOfSeats int,
+	@Id int = 0 output
+
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	insert into Aircraft 
+	values(@SerialNumber, @ModelName, @NumberOfSeats);
+
+	select @Id = SCOPE_IDENTITY();
+END
+GO
+
+```
