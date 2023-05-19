@@ -21,6 +21,8 @@ namespace FlightReservationUI
 
         private void addAircraftButton_Click(object sender, EventArgs e)
         {
+
+            // TODO - SerialNumber existence
             // TODO - validate nSeats
             var aircraft = new AircaftModel
             {
