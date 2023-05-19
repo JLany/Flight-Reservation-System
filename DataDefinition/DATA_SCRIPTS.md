@@ -235,10 +235,65 @@ BEGIN
 	
 	SET NOCOUNT ON;
 
-	insert into Aircraft 
-	values(@SerialNumber, @ModelName, @NumberOfSeats);
+	INSERT INTO Aircraft 
+	VALUES (@SerialNumber, @ModelName, @NumberOfSeats);
 
-	select @Id = SCOPE_IDENTITY();
+	SELECT @Id = SCOPE_IDENTITY();
+END
+GO
+
+CREATE PROCEDURE spAircraft_GetByDate
+	@DepartureTime datetime2(7),
+	@ArrivalTime datetime2(7)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT Aircraft.*
+	FROM Aircraft
+	Left JOIN Flight ON Aircraft.Id = Flight.AircraftId
+	WHERE Flight.Id IS NULL OR (
+		(@ArrivalTime < Flight.DepartureTime 
+		OR 
+		@DepartureTime > Flight.ArrivalTime)
+		AND
+		Flight.AircraftId IS NOT NULL
+	)
+
+END
+GO
+
+CREATE PROCEDURE spFlight_Insert
+	@FlightNumber varchar(20),
+	@OriginAirport varchar(10),
+	@DestinationAirport varchar(10),
+	@DepartureTime datetime2(7),
+	@ArrivalTime datetime2(7),
+	@TripDuration decimal(6, 2),
+	@Cost money,
+	@AircraftId int,
+	@BusinessClassSeats int,
+	@EconomyClassSeats int,
+	@Id int = 0 output
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	INSERT INTO Flight
+	VALUES (@FlightNumber,
+			@OriginAirport,
+			@DestinationAirport,
+			@DepartureTime,
+			@ArrivalTime,
+			@TripDuration,
+			@Cost,
+			@AircraftId,
+			@BusinessClassSeats,
+			@EconomyClassSeats)
+			
+	SELECT @Id = SCOPE_IDENTITY();
 END
 GO
 
