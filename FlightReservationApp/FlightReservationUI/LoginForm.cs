@@ -14,11 +14,32 @@ namespace FlightReservationUI
 {
     public partial class LoginForm : Form
     {
+        private bool hasChildren = false;
+
         public LoginForm()
         {
             InitializeComponent();
 
+            errorLabel.Text = "";
+
             loginButton.Click += LoginButton_Click;
+            signUpLink.Click += SignUpLink_Click;
+            this.FormClosed += LoginForm_FormClosed;
+        }
+
+        private void SignUpLink_Click(object? sender, EventArgs e)
+        {
+            new SignUpForm().Show();
+            hasChildren = true;
+            this.Close();
+        }
+
+        private void LoginForm_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            if (!hasChildren)
+            {
+                Application.Exit();
+            }
         }
 
         private void LoginButton_Click(object? sender, EventArgs e)
@@ -33,11 +54,13 @@ namespace FlightReservationUI
 
             if (authenticated)
             {
-                // TODO - Redirect to TicketsDashboardForm with an attached user email
+                new TicketsDashboardForm(authentication.UserEmail).Show();                
+                hasChildren = true;
+                this.Close();
             }
             else
             {
-                // TODO - Show "invalid credentials" message
+                errorLabel.Text = "Incorrect email or password.";
             }
         }
     }

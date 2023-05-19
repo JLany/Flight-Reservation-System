@@ -45,6 +45,7 @@
             confirmPasswordTextBox = new TextBox();
             confirmPasswordLabel = new Label();
             signUpButton = new Button();
+            errorLabel = new Label();
             SuspendLayout();
             // 
             // firstNameLabel
@@ -194,12 +195,24 @@
             signUpButton.Text = "Sign Up";
             signUpButton.UseVisualStyleBackColor = false;
             // 
+            // errorLabel
+            // 
+            errorLabel.AutoSize = true;
+            errorLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            errorLabel.ForeColor = Color.Red;
+            errorLabel.Location = new Point(169, 99);
+            errorLabel.Name = "errorLabel";
+            errorLabel.Size = new Size(67, 21);
+            errorLabel.TabIndex = 17;
+            errorLabel.Text = "<error>";
+            // 
             // SignUpForm
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(475, 467);
+            ClientSize = new Size(482, 467);
+            Controls.Add(errorLabel);
             Controls.Add(signUpButton);
             Controls.Add(confirmPasswordTextBox);
             Controls.Add(confirmPasswordLabel);
@@ -244,5 +257,6 @@
         private TextBox confirmPasswordTextBox;
         private Label confirmPasswordLabel;
         private Button signUpButton;
+        private Label errorLabel;
     }
 }

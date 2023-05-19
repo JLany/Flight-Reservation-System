@@ -13,7 +13,6 @@ using System.Windows.Forms;
 namespace FlightReservationUI
 {
     // TODO - Wire up Cancel Ticket button
-    // TODO - Wire up Book New Flight button
 
     public partial class TicketsDashboardForm : Form
     {
@@ -25,10 +24,28 @@ namespace FlightReservationUI
             InitializeComponent();
 
             currentCustomer = GlobalConfig.Connector.GetCustomer_ByEmail(customerEmail);
-            tickets = GlobalConfig.Connector.GetTickets_ByCustomer(currentCustomer);
 
             WireUpTicketsListBox();
             SetUpTicketDetails();
+
+            bookNewTicketButton.Click += BookNewTicketButton_Click;
+            this.FormClosed += TicketsDashboardForm_FormClosed;
+        }
+
+        private void TicketsDashboardForm_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            new LoginForm().Show();
+        }
+
+        public void RefreshData()
+        {
+            WireUpTicketsListBox();
+        }
+
+        private void BookNewTicketButton_Click(object? sender, EventArgs e)
+        {
+            new BookTicketForm(this, currentCustomer).Show();
+            this.Enabled = false;
         }
 
         private void SetUpTicketDetails()
@@ -40,22 +57,24 @@ namespace FlightReservationUI
 
         private void TicketsListBox_SelectedValueChanged(object? sender, EventArgs e)
         {
+            if (ticketsListBox.SelectedItems.Count < 1)
+            {
+                return;
+            }
+
             WireUpTicketDetails(((FlightTicketModel)ticketsListBox.SelectedItem));
         }
 
         private void WireUpTicketsListBox()
         {
-            ticketsListBox.DataSource = tickets;
-            ticketsListBox.DisplayMember = "Summary";
+            tickets = GlobalConfig.Connector.GetTickets_ByCustomer(currentCustomer);
+
+            ticketsListBox.DataSource = tickets.OrderBy(ticket => ticket.Flight.DepartureTime).ToList();
+            ticketsListBox.DisplayMember = "TicketSummary";
         }
 
         private void WireUpTicketDetails(FlightTicketModel ticket)
         {
-            if (ticket == null)
-            {
-                return;
-            }
-
             ticketDetailsGroupBox.Enabled = true;
 
             ticketNumberTextBox.Text = ticket.TicketNumber;

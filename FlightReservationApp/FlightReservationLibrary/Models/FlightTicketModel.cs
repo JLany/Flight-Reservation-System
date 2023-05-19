@@ -14,9 +14,9 @@ namespace FlightReservationLibrary.Models
         public FlightModel Flight { get; set; }
         public FlightClass FlightClass { get; set; }
 
-        public string Summary
+        public string TicketSummary
         {
-            get => $"{TicketNumber} - {Flight.DestinationAirport}";
+            get => $"{TicketNumber}  ({Flight.OriginAirport} - {Flight.DestinationAirport})";
         }
     }
 }

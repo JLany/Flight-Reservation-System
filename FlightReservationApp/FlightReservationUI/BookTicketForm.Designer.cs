@@ -41,6 +41,14 @@
             flightsListBox = new ListBox();
             flightsLabel = new Label();
             flightDetailsGroupBox = new GroupBox();
+            aircraftModelTextBox = new TextBox();
+            costTextBox = new TextBox();
+            tripDurationTextBox = new TextBox();
+            flightDetailsOriginTextBox = new TextBox();
+            flightDetailsDestinationTextBox = new TextBox();
+            arrivalTimeTextBox = new TextBox();
+            departureTimeTextBox = new TextBox();
+            flightNumberTextBox = new TextBox();
             aircraftModelLabel = new Label();
             costLabel = new Label();
             tripDurationLabel = new Label();
@@ -50,14 +58,7 @@
             flightDetailsOriginLabel = new Label();
             flightNumberLabel = new Label();
             bookFlightButton = new Button();
-            flightNumberTextBox = new TextBox();
-            departureTimeTextBox = new TextBox();
-            arrivalTimeTextBox = new TextBox();
-            flightDetailsDestinationTextBox = new TextBox();
-            flightDetailsOriginTextBox = new TextBox();
-            tripDurationTextBox = new TextBox();
-            costTextBox = new TextBox();
-            aircraftModelTextBox = new TextBox();
+            errorLabel = new Label();
             flightDetailsGroupBox.SuspendLayout();
             SuspendLayout();
             // 
@@ -196,12 +197,84 @@
             flightDetailsGroupBox.Controls.Add(flightDetailsDestinationLabel);
             flightDetailsGroupBox.Controls.Add(flightDetailsOriginLabel);
             flightDetailsGroupBox.Controls.Add(flightNumberLabel);
-            flightDetailsGroupBox.Location = new Point(324, 279);
+            flightDetailsGroupBox.Location = new Point(332, 279);
             flightDetailsGroupBox.Name = "flightDetailsGroupBox";
-            flightDetailsGroupBox.Size = new Size(352, 364);
+            flightDetailsGroupBox.Size = new Size(344, 364);
             flightDetailsGroupBox.TabIndex = 43;
             flightDetailsGroupBox.TabStop = false;
             flightDetailsGroupBox.Text = "Flight Details";
+            // 
+            // aircraftModelTextBox
+            // 
+            aircraftModelTextBox.BorderStyle = BorderStyle.FixedSingle;
+            aircraftModelTextBox.Location = new Point(175, 317);
+            aircraftModelTextBox.Name = "aircraftModelTextBox";
+            aircraftModelTextBox.ReadOnly = true;
+            aircraftModelTextBox.Size = new Size(154, 35);
+            aircraftModelTextBox.TabIndex = 15;
+            // 
+            // costTextBox
+            // 
+            costTextBox.BorderStyle = BorderStyle.FixedSingle;
+            costTextBox.Location = new Point(175, 276);
+            costTextBox.Name = "costTextBox";
+            costTextBox.ReadOnly = true;
+            costTextBox.Size = new Size(154, 35);
+            costTextBox.TabIndex = 14;
+            // 
+            // tripDurationTextBox
+            // 
+            tripDurationTextBox.BorderStyle = BorderStyle.FixedSingle;
+            tripDurationTextBox.Location = new Point(175, 235);
+            tripDurationTextBox.Name = "tripDurationTextBox";
+            tripDurationTextBox.ReadOnly = true;
+            tripDurationTextBox.Size = new Size(154, 35);
+            tripDurationTextBox.TabIndex = 13;
+            // 
+            // flightDetailsOriginTextBox
+            // 
+            flightDetailsOriginTextBox.BorderStyle = BorderStyle.FixedSingle;
+            flightDetailsOriginTextBox.Location = new Point(175, 71);
+            flightDetailsOriginTextBox.Name = "flightDetailsOriginTextBox";
+            flightDetailsOriginTextBox.ReadOnly = true;
+            flightDetailsOriginTextBox.Size = new Size(154, 35);
+            flightDetailsOriginTextBox.TabIndex = 12;
+            // 
+            // flightDetailsDestinationTextBox
+            // 
+            flightDetailsDestinationTextBox.BorderStyle = BorderStyle.FixedSingle;
+            flightDetailsDestinationTextBox.Location = new Point(175, 112);
+            flightDetailsDestinationTextBox.Name = "flightDetailsDestinationTextBox";
+            flightDetailsDestinationTextBox.ReadOnly = true;
+            flightDetailsDestinationTextBox.Size = new Size(154, 35);
+            flightDetailsDestinationTextBox.TabIndex = 11;
+            // 
+            // arrivalTimeTextBox
+            // 
+            arrivalTimeTextBox.BorderStyle = BorderStyle.FixedSingle;
+            arrivalTimeTextBox.Location = new Point(175, 194);
+            arrivalTimeTextBox.Name = "arrivalTimeTextBox";
+            arrivalTimeTextBox.ReadOnly = true;
+            arrivalTimeTextBox.Size = new Size(154, 35);
+            arrivalTimeTextBox.TabIndex = 10;
+            // 
+            // departureTimeTextBox
+            // 
+            departureTimeTextBox.BorderStyle = BorderStyle.FixedSingle;
+            departureTimeTextBox.Location = new Point(175, 153);
+            departureTimeTextBox.Name = "departureTimeTextBox";
+            departureTimeTextBox.ReadOnly = true;
+            departureTimeTextBox.Size = new Size(154, 35);
+            departureTimeTextBox.TabIndex = 9;
+            // 
+            // flightNumberTextBox
+            // 
+            flightNumberTextBox.BorderStyle = BorderStyle.FixedSingle;
+            flightNumberTextBox.Location = new Point(175, 29);
+            flightNumberTextBox.Name = "flightNumberTextBox";
+            flightNumberTextBox.ReadOnly = true;
+            flightNumberTextBox.Size = new Size(154, 35);
+            flightNumberTextBox.TabIndex = 8;
             // 
             // aircraftModelLabel
             // 
@@ -286,76 +359,24 @@
             bookFlightButton.Text = "Book Flight";
             bookFlightButton.UseVisualStyleBackColor = false;
             // 
-            // flightNumberTextBox
+            // errorLabel
             // 
-            flightNumberTextBox.BorderStyle = BorderStyle.FixedSingle;
-            flightNumberTextBox.Location = new Point(175, 29);
-            flightNumberTextBox.Name = "flightNumberTextBox";
-            flightNumberTextBox.Size = new Size(164, 35);
-            flightNumberTextBox.TabIndex = 8;
-            // 
-            // departureTimeTextBox
-            // 
-            departureTimeTextBox.BorderStyle = BorderStyle.FixedSingle;
-            departureTimeTextBox.Location = new Point(175, 153);
-            departureTimeTextBox.Name = "departureTimeTextBox";
-            departureTimeTextBox.Size = new Size(164, 35);
-            departureTimeTextBox.TabIndex = 9;
-            // 
-            // arrivalTimeTextBox
-            // 
-            arrivalTimeTextBox.BorderStyle = BorderStyle.FixedSingle;
-            arrivalTimeTextBox.Location = new Point(175, 194);
-            arrivalTimeTextBox.Name = "arrivalTimeTextBox";
-            arrivalTimeTextBox.Size = new Size(164, 35);
-            arrivalTimeTextBox.TabIndex = 10;
-            // 
-            // flightDetailsDestinationTextBox
-            // 
-            flightDetailsDestinationTextBox.BorderStyle = BorderStyle.FixedSingle;
-            flightDetailsDestinationTextBox.Location = new Point(175, 112);
-            flightDetailsDestinationTextBox.Name = "flightDetailsDestinationTextBox";
-            flightDetailsDestinationTextBox.Size = new Size(164, 35);
-            flightDetailsDestinationTextBox.TabIndex = 11;
-            // 
-            // flightDetailsOriginTextBox
-            // 
-            flightDetailsOriginTextBox.BorderStyle = BorderStyle.FixedSingle;
-            flightDetailsOriginTextBox.Location = new Point(175, 71);
-            flightDetailsOriginTextBox.Name = "flightDetailsOriginTextBox";
-            flightDetailsOriginTextBox.Size = new Size(164, 35);
-            flightDetailsOriginTextBox.TabIndex = 12;
-            // 
-            // tripDurationTextBox
-            // 
-            tripDurationTextBox.BorderStyle = BorderStyle.FixedSingle;
-            tripDurationTextBox.Location = new Point(175, 235);
-            tripDurationTextBox.Name = "tripDurationTextBox";
-            tripDurationTextBox.Size = new Size(164, 35);
-            tripDurationTextBox.TabIndex = 13;
-            // 
-            // costTextBox
-            // 
-            costTextBox.BorderStyle = BorderStyle.FixedSingle;
-            costTextBox.Location = new Point(175, 276);
-            costTextBox.Name = "costTextBox";
-            costTextBox.Size = new Size(164, 35);
-            costTextBox.TabIndex = 14;
-            // 
-            // aircraftModelTextBox
-            // 
-            aircraftModelTextBox.BorderStyle = BorderStyle.FixedSingle;
-            aircraftModelTextBox.Location = new Point(175, 317);
-            aircraftModelTextBox.Name = "aircraftModelTextBox";
-            aircraftModelTextBox.Size = new Size(164, 35);
-            aircraftModelTextBox.TabIndex = 15;
+            errorLabel.AutoSize = true;
+            errorLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            errorLabel.ForeColor = Color.Red;
+            errorLabel.Location = new Point(179, 743);
+            errorLabel.Name = "errorLabel";
+            errorLabel.Size = new Size(67, 21);
+            errorLabel.TabIndex = 45;
+            errorLabel.Text = "<error>";
             // 
             // BookTicketForm
             // 
             AutoScaleDimensions = new SizeF(12F, 30F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
-            ClientSize = new Size(688, 761);
+            ClientSize = new Size(688, 772);
+            Controls.Add(errorLabel);
             Controls.Add(bookFlightButton);
             Controls.Add(flightDetailsGroupBox);
             Controls.Add(flightsLabel);
@@ -412,5 +433,6 @@
         private TextBox arrivalTimeTextBox;
         private TextBox departureTimeTextBox;
         private TextBox flightNumberTextBox;
+        private Label errorLabel;
     }
 }

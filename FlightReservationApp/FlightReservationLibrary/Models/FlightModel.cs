@@ -20,6 +20,11 @@ namespace FlightReservationLibrary.Models
         public int BusinessClassSeats { get; set; }
         public int EconomyClassSeats { get; set; }
 
+        public string FlightSummary
+        {
+            get => $"{OriginAirport} - {DestinationAirport} ({DepartureTime.Date.ToShortDateString()})";
+        }
+
         public string TripDurationString
         {
             get => $"{((int)TripDuration > 0 ? $"{(int)TripDuration} hour(s)" : "")} " +

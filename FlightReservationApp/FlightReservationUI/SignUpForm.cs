@@ -19,7 +19,15 @@ namespace FlightReservationUI
         {
             InitializeComponent();
 
+            errorLabel.Text = "";
+
             signUpButton.Click += SignUpButton_Click;
+            this.FormClosed += SignUpForm_FormClosed;
+        }
+
+        private void SignUpForm_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            new LoginForm().Show();
         }
 
         private void SignUpButton_Click(object? sender, EventArgs e)
@@ -42,7 +50,7 @@ namespace FlightReservationUI
 
             if (GlobalConfig.Connector.CheckCustomer_EmailExists(customer.Email))
             {
-                // TODO - Show error message for the user
+                errorLabel.Text = "An account already exists with this email.";
 
                 return;
             }
@@ -51,13 +59,13 @@ namespace FlightReservationUI
 
             ResetSignUpForm();
 
-            // TODO - Redirect to login form
+            this.Close();
         }
 
         private bool ValidateSignUpForm()
         {
             // TODO - Implement the actual validation 
-            
+
             return true;
         }
 
