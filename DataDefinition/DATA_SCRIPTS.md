@@ -273,4 +273,31 @@ END
 GO
 
 
+CREATE PROCEDURE spFlightTicket_CheckExists
+	@CustomerId int,
+	@FlightId int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+    declare @Exists bit;
+
+	if exists (
+		select 1 
+		from FlightTicket
+		where CustomerId = @CustomerId
+			and FlightId = @FlightId
+		)
+		set @Exists = 1;
+	else
+		set @Exists = 0;
+
+	select @Exists as TicketExists;
+
+END
+GO
+
+
 ```
