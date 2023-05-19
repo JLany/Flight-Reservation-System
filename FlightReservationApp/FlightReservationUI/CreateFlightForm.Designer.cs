@@ -150,6 +150,7 @@
             departureTimePicker.Name = "departureTimePicker";
             departureTimePicker.Size = new Size(185, 35);
             departureTimePicker.TabIndex = 31;
+            departureTimePicker.ValueChanged += departureTimePicker_ValueChanged;
             // 
             // arrivalTimePicker
             // 
@@ -248,6 +249,7 @@
             addFlightButton.TabIndex = 43;
             addFlightButton.Text = "Add Flight";
             addFlightButton.UseVisualStyleBackColor = false;
+            addFlightButton.Click += addFlightButton_Click;
             // 
             // CreateFlightForm
             // 
