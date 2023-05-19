@@ -326,3 +326,23 @@ GO
 
 
 ```
+
+### Yusuf Badr : 19/05/2023
+
+```
+CREATE PROCEDURE spFlight_GetFligtsBetweenStartDatetimeAndEndDatetime
+
+	@StartDatetime datetime2,
+	@EndDatetime datetime2
+AS
+BEGIN
+	SET NOCOUNT ON;
+
+	SELECT *
+	FROM Flight
+	WHERE Flight.DepartureTime >= @StartDatetime AND Flight.ArrivalTime <= @EndDatetime;
+	RETURN;
+END
+GO
+
+```
