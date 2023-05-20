@@ -255,7 +255,7 @@ namespace FlightReservationLibrary.DataAccess
 
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
             {
-                Aircrafts = 
+                Aircrafts =
                     connection.Query<AircaftModel>("SELECT * FROM Aircraft").ToList();
             }
 
@@ -264,7 +264,26 @@ namespace FlightReservationLibrary.DataAccess
 
         public void UpdateAircraft(AircaftModel model)
         {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                var parameters = new DynamicParameters();
 
+                parameters.Add("@Id", model.Id);
+                parameters.Add("@SerialNumber", model.SerialNumber);
+                parameters.Add("@ModelName", model.ModelName);
+                parameters.Add("@NumberOfSeats", model.NumberOfSeats);
+
+                connection.Execute("dbo.spAircraft_Update", parameters, commandType: CommandType.StoredProcedure);
+            }
         }
+
+        public void DeleteAircraft_ById(int aircraftID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                connection.Execute($"Delete FROM Aircraft WHERE Id = {aircraftID}");
+            }
+        }
+
     }
 }
