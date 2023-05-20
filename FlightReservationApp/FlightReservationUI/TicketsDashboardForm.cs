@@ -1,5 +1,6 @@
 ﻿using FlightReservationLibrary;
 using FlightReservationLibrary.Models;
+using FlightReservationUI.Communication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ namespace FlightReservationUI
 {
     // TODO - Wire up Cancel Ticket button
 
-    public partial class TicketsDashboardForm : Form
+    public partial class TicketsDashboardForm : Form, ITicketRequester
     {
         private CustomerModel currentCustomer;
         private List<FlightTicketModel> tickets;
@@ -37,11 +38,6 @@ namespace FlightReservationUI
             new LoginForm().Show();
         }
 
-        public void RefreshData()
-        {
-            WireUpTicketsListBox();
-        }
-
         private void BookNewTicketButton_Click(object? sender, EventArgs e)
         {
             new BookTicketForm(this, currentCustomer).Show();
@@ -62,7 +58,7 @@ namespace FlightReservationUI
                 return;
             }
 
-            WireUpTicketDetails(((FlightTicketModel)ticketsListBox.SelectedItem));
+            WireUpTicketDetails((FlightTicketModel)ticketsListBox.SelectedItem);
         }
 
         private void WireUpTicketsListBox()
@@ -92,6 +88,14 @@ namespace FlightReservationUI
             originText.Text = flight.OriginAirport;
             destinationText.Text = flight.DestinationAirport;
             tripDurationText.Text = flight.TripDurationString;
+        }
+
+        void ITicketRequester.TicketResponse(FlightTicketModel ticket)
+        {
+            tickets.Add(ticket);
+            WireUpTicketsListBox();
+
+            this.Enabled = true;
         }
     }
 }

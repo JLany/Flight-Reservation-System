@@ -1,5 +1,6 @@
 ﻿using FlightReservationLibrary;
 using FlightReservationLibrary.Models;
+using FlightReservationUI.Communication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,18 +15,18 @@ namespace FlightReservationUI
 {
     public partial class BookTicketForm : Form
     {
-        private TicketsDashboardForm myParent;
-        private List<string> availableFlightClasses;
+        private ITicketRequester clientProcess;
+        private List<string> availableFlightClasses = new() { "Business", "Economy" };
         private readonly List<string> availableOrigins = GlobalConfig.Connector.Get_AllOrigins();
         private readonly List<string> availableDestinations = GlobalConfig.Connector.Get_AllDestinations();
-        private List<FlightModel> flights = new List<FlightModel>();
+        private List<FlightModel> flights = new();
         private readonly CustomerModel currentCustomer;
 
-        public BookTicketForm(TicketsDashboardForm myParent, CustomerModel customer)
+        public BookTicketForm(ITicketRequester client, CustomerModel customer)
         {
             InitializeComponent();
 
-            this.myParent = myParent;
+            clientProcess = client;
             currentCustomer = customer;
 
             SetUpForm();
@@ -52,13 +53,6 @@ namespace FlightReservationUI
             findFlightsButton.Click += FindFlightsButton_Click;
             flightsListBox.SelectedIndexChanged += FlightsListBox_SelectedIndexChanged;
             bookFlightButton.Click += BookFlightButton_Click;
-            this.FormClosed += BookTicketForm_FormClosed;
-        }
-
-        private void BookTicketForm_FormClosed(object? sender, FormClosedEventArgs e)
-        {
-            myParent.RefreshData();
-            myParent.Enabled = true;
         }
 
         private void BookFlightButton_Click(object? sender, EventArgs e)
@@ -164,7 +158,7 @@ namespace FlightReservationUI
             flights = GlobalConfig.Connector.GetFlights_DateOriginDestination(query);
 
             // WireUpFlightsListBox
-            flightsListBox.DataSource = flights;
+            flightsListBox.DataSource = flights.OrderBy(flight => flight.DepartureTime).ToList();
             flightsListBox.DisplayMember = "FlightSummary";
         }
     }
