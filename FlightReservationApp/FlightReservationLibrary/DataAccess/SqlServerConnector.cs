@@ -277,11 +277,45 @@ namespace FlightReservationLibrary.DataAccess
             }
         }
 
-        public void DeleteAircraft_ById(int aircraftID)
+        public void DeleteAircraft_ById(int aircraftId)
         {
             using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
             {
-                connection.Execute($"Delete FROM Aircraft WHERE Id = {aircraftID}");
+                connection.Execute($"Delete FROM Aircraft WHERE Id = {aircraftId}");
+            }
+        }
+
+        public List<FlightModel> GetAllFlights()
+        {
+            var Flights = new List<FlightModel>();
+
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                Flights =
+                    connection.Query<FlightModel>("SELECT * FROM Flight").ToList();
+            }
+
+            return Flights;
+        }
+
+        public void UpdateFlightDate_ByID(DateTime departureTime, DateTime arrivalTime, int flightID)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@id", flightID);
+                parameters.Add("@DepartureTime", departureTime);
+                parameters.Add("@ArrivalTime", arrivalTime);
+
+                connection.Execute("dbo.spFlight_UpdateDate", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
+
+        public void DeleteFlight_ById(int flightId)
+        {
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                connection.Execute($"Delete FROM Flight WHERE Id = {flightId}");
             }
         }
 
