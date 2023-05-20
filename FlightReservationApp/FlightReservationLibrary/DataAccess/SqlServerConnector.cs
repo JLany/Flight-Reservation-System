@@ -150,6 +150,21 @@ namespace FlightReservationLibrary.DataAccess
             return model;
         }
 
+        public void DeleteTicket(FlightTicketModel ticket)
+        {
+            using (IDbConnection connection =
+                new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("Id", ticket.Id);
+
+                connection.Execute("dbo.spFlightTicket_DeleteById", parameters
+                    , commandType: CommandType.StoredProcedure);
+
+                ticket.Id = -1;
+            }
+        }
+
         public CustomerModel GetCustomer_ByEmail(string email)
         {
             CustomerModel output;

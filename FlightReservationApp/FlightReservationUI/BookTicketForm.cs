@@ -69,14 +69,19 @@ namespace FlightReservationUI
                 return;
             }
 
+
             // aquire data from fields (build a ticket)
+            var selectedFlight = (FlightModel)flightsListBox.SelectedItem;
+
+            var ticketNumber = currentCustomer.FirstName[0] + currentCustomer.MiddleName[0]
+                + currentCustomer.LastName[0] + selectedFlight.FlightNumber;
+
             var ticket = new FlightTicketModel
             {
-                // TODO - Decide on how to generate unique ticket numbers
-                TicketNumber = "XYZ123",
+                TicketNumber = ticketNumber,
 
                 Passenger = currentCustomer,
-                Flight = (FlightModel)flightsListBox.SelectedItem,
+                Flight = selectedFlight,
 
                 // TODO - (OPTIONAL) Could be better!
                 FlightClass = ((string)classComboBox.SelectedItem
@@ -106,7 +111,19 @@ namespace FlightReservationUI
 
         private bool ValidateTicketForm()
         {
-            // TODO - Implement necessary checks (e.g., there is a flight selected, there is a class selected, etc.)
+            if (flightsListBox.SelectedItem == null)
+            {
+                errorLabel.Text = "Please select a flight first.";
+
+                return false;
+            }
+
+            if (classComboBox.SelectedItem == null)
+            {
+                errorLabel.Text = "Please select a class first.";
+
+                return false;
+            }
 
             return true;
         }

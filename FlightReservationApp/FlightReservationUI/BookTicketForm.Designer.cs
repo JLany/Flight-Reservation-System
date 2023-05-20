@@ -361,14 +361,14 @@
             // 
             // errorLabel
             // 
-            errorLabel.AutoSize = true;
             errorLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             errorLabel.ForeColor = Color.Red;
-            errorLabel.Location = new Point(179, 743);
+            errorLabel.Location = new Point(94, 742);
             errorLabel.Name = "errorLabel";
-            errorLabel.Size = new Size(67, 21);
+            errorLabel.Size = new Size(500, 21);
             errorLabel.TabIndex = 45;
             errorLabel.Text = "<error>";
+            errorLabel.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // BookTicketForm
             // 

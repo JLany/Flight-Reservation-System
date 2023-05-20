@@ -73,7 +73,87 @@ namespace FlightReservationUI
 
         private bool ValidateForm()
         {
-            // TODO - Implement the actual validation (same as sign up form validation)
+            bool valid = true;
+
+            if (firstNameTextBox.Text.Length < 1)
+            {
+                errorLabel.Text = "First name too short.";
+                valid = false;
+            }
+
+            if (firstNameTextBox.Text.Length > 50)
+            {
+                errorLabel.Text = "First name too long.";
+                valid = false;
+            }
+
+            if (middleNameTextBox.Text.Length < 1)
+            {
+                errorLabel.Text = "Middle name too short.";
+                valid = false;
+            }
+
+            if (middleNameTextBox.Text.Length > 50)
+            {
+                errorLabel.Text = "Middle name too long.";
+                valid = false;
+            }
+
+            if (lastNameTextBox.Text.Length < 1)
+            {
+                errorLabel.Text = "Last name too short.";
+                valid = false;
+            }
+
+            if (lastNameTextBox.Text.Length > 50)
+            {
+                errorLabel.Text = "Last name too long.";
+                valid = false;
+            }
+
+            if (emailTextBox.Text.Length < 1)
+            {
+                errorLabel.Text = "Email too short.";
+                valid = false;
+            }
+
+            if (emailTextBox.Text.Length > 100)
+            {
+                errorLabel.Text = "Email too long.";
+                valid = false;
+            }
+
+            if (passportNumberTextBox.Text.Length < 1)
+            {
+                errorLabel.Text = "Passport number too short.";
+                valid = false;
+            }
+
+            if (passportNumberTextBox.Text.Length > 20)
+            {
+                errorLabel.Text = "Passport number too long.";
+                valid = false;
+            }
+
+            if (passwordTextBox.Text.Length < 8)
+            {
+                errorLabel.Text = "Password too short.";
+                valid = false;
+            }
+
+            if (passwordTextBox.Text.Length > 100)
+            {
+                errorLabel.Text = "Password too long.";
+                valid = false;
+            }
+
+            if (confirmPasswordTextBox.Text != passwordTextBox.Text)
+            {
+                errorLabel.Text = "Passwords do not match.";
+                valid = false;
+            }
+
+            return valid;
 
             return true;
         }

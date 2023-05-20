@@ -13,11 +13,9 @@ using System.Windows.Forms;
 
 namespace FlightReservationUI
 {
-    // TODO - Wire up Cancel Ticket button
-
     public partial class TicketsDashboardForm : Form, ITicketRequester
     {
-        private CustomerModel currentCustomer;
+        private readonly CustomerModel currentCustomer;
         private List<FlightTicketModel> tickets;
         private bool hasChildren = false;
 
@@ -26,14 +24,57 @@ namespace FlightReservationUI
             InitializeComponent();
 
             currentCustomer = GlobalConfig.Connector.GetCustomer_ByEmail(customerEmail);
+            tickets = GlobalConfig.Connector.GetTickets_ByCustomer(currentCustomer);
             messageLabel.Text = message;
 
             WireUpTicketsListBox();
             SetUpTicketDetails();
 
+            cancelTicketButton.Click += CancelTicketButton_Click;
             bookNewTicketButton.Click += BookNewTicketButton_Click;
             manageAccountLink.LinkClicked += ManageAccountLink_LinkClicked;
             this.FormClosed += TicketsDashboardForm_FormClosed;
+        }
+
+        private void CancelTicketButton_Click(object? sender, EventArgs e)
+        {
+            var ticket = (FlightTicketModel)ticketsListBox.SelectedItem;
+
+            if (!IsAbleToCancel(ticket))
+            {
+                return;
+            }
+
+            var response = MessageBox.Show("Are you sure you want to cancel this ticket?", "Confirm"
+                , MessageBoxButtons.YesNo);
+
+            if (response == DialogResult.Yes)
+            {
+                // Delete ticket from database
+                GlobalConfig.Connector.DeleteTicket(ticket);
+
+                // TODO - Implement a way to communicate back to customer about his refund (Payment)
+
+                // Remove ticket from list of tickets
+                tickets.Remove(ticket);
+
+                // Wire up tickets list
+                WireUpTicketsListBox();
+            }
+        }
+
+        private bool IsAbleToCancel(FlightTicketModel ticket)
+        {
+            bool ableToCancel = true;
+
+            if (ticket.Flight.DepartureTime.Subtract(DateTime.Now).TotalHours < 24) 
+            {
+                ableToCancel = false;
+                MessageBox.Show("You can only cancel a flight before 24 hours or more of its departure time.",
+                    "Denied", MessageBoxButtons.OK);
+            }
+
+            return ableToCancel;
         }
 
         private void ManageAccountLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -76,8 +117,6 @@ namespace FlightReservationUI
 
         private void WireUpTicketsListBox()
         {
-            tickets = GlobalConfig.Connector.GetTickets_ByCustomer(currentCustomer);
-
             ticketsListBox.DataSource = tickets.OrderBy(ticket => ticket.Flight.DepartureTime).ToList();
             ticketsListBox.DisplayMember = "TicketSummary";
         }
