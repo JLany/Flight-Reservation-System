@@ -313,3 +313,24 @@ END
 GO
 
 ```
+
+### Shehab Diab : 5/20/2023
+______________________________________________________________________
+
+```
+CREATE PROCEDURE spFlight_UpdateDate
+	@Id int,
+	@DepartureTime datetime2(7),
+	@ArrivalTime datetime2(7)
+AS
+BEGIN
+
+	UPDATE Flight
+	SET 
+	DepartureTime = @DepartureTime,
+	ArrivalTime  = @ArrivalTime
+	WHERE Id = @Id
+END
+GO
+
+```
