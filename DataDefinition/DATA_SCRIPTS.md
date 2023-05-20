@@ -252,14 +252,11 @@ BEGIN
 
 	SELECT Aircraft.*
 	FROM Aircraft
-	Left JOIN Flight ON Aircraft.Id = Flight.AircraftId
-	WHERE Flight.Id IS NULL OR (
-		(@ArrivalTime < Flight.DepartureTime 
-		OR 
-		@DepartureTime > Flight.ArrivalTime)
-		AND
-		Flight.AircraftId IS NOT NULL
-	)
+	LEFT JOIN Flight
+	ON Aircraft.Id = Flight.AircraftId
+	AND Flight.DepartureTime < @ArrivalTime
+	AND Flight.ArrivalTime > @DepartureTime
+	WHERE Flight.AircraftId IS NULL
 
 END
 GO
