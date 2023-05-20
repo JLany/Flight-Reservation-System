@@ -12,9 +12,17 @@ namespace FlightReservationLibrary.Models
         public string SerialNumber { get; set; }
         public string ModelName { get; set; }
         public int NumberOfSeats { get; set; } 
-        public string ModelData
+        
+
+        // i have to think of better names for these two
+        public string PartialModelData
         {
             get => $"{ModelName} - {NumberOfSeats} Seats";
+        }
+
+        public string FullModelData
+        {
+            get => $"{Id} - {SerialNumber} - {ModelName} - {NumberOfSeats} Seats";
         }
     }
 
