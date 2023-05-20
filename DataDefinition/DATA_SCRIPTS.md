@@ -422,6 +422,9 @@ CREATE PROCEDURE spAircraft_Insert
 	@NumberOfSeats int,
 	@Id int = 0 output
 	
+AS
+BEGIN
+
 	SET NOCOUNT ON;
 
 	INSERT INTO Aircraft 
