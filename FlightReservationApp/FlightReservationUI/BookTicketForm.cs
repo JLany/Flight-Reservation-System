@@ -92,6 +92,8 @@ namespace FlightReservationUI
             // save ticket to database
             ticket = GlobalConfig.Connector.CreateTicket(ticket);
 
+            clientProcess.TicketResponse(ticket);
+
             this.Close();
         }
 
