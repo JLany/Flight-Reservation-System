@@ -48,6 +48,7 @@ namespace FlightReservationUI
                 return;
 
             var selectedAircraft = Aircrafts[selectedIndex];
+            UpdateInMemory(selectedAircraft);
             GlobalConfig.Connector.UpdateAircraft(selectedAircraft);
             ReLoadAircraftsListBox();
         }
@@ -71,6 +72,13 @@ namespace FlightReservationUI
             ResetAircraftData();
             AircraftListBox.DataSource = Aircrafts;
             AircraftListBox.DisplayMember = "FullModelData";
+        }
+
+        private void UpdateInMemory(AircaftModel aircraft)
+        {
+            aircraft.ModelName = ModelNameTextbox.Text;
+            aircraft.SerialNumber = SerialNTextbox.Text;
+            aircraft.NumberOfSeats = int.Parse(nSeatsTextBox.Text);
         }
 
         private void ResetAircraftData()
