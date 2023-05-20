@@ -282,6 +282,7 @@ namespace FlightReservationLibrary.DataAccess
                 new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
             {
                 var parameters = new DynamicParameters();
+                parameters.Add("@Id", customer.Id);
                 parameters.Add("@FirstName", customer.FirstName);
                 parameters.Add("@MiddleName", customer.MiddleName);
                 parameters.Add("@LastName", customer.LastName);
@@ -290,7 +291,7 @@ namespace FlightReservationLibrary.DataAccess
                 parameters.Add("@PhoneNumber", customer.PhoneNumber);
                 parameters.Add("@Password", customer.Password);
 
-                connection.Execute("dbo.spCustomer_CheckAnotherEmailExists", parameters
+                connection.Execute("dbo.spCustomer_Update", parameters
                     , commandType: CommandType.StoredProcedure);
             }
 
