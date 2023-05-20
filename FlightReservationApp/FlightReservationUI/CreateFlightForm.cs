@@ -15,29 +15,50 @@ namespace FlightReservationUI
     public partial class CreateFlightForm : Form
     {
 
+    /*
+     * Check DepDate < ArrivalDate
+     * Remove Trip Duration
+     * Validate nEconomy/Business Seats
+     */
+
         List<AircaftModel> AvailableAircraft;
         public CreateFlightForm()
         {
             InitializeComponent();
 
             AvailableAircraft = new List<AircaftModel>();
-            aircraftComboBox.DataSource = AvailableAircraft;
-            aircraftComboBox.DisplayMember = "ModelData";
+            departureTimePicker.ValueChanged += DepartureTimePicker_ValueChanged;
+            arrivalTimePicker.ValueChanged += ArrivalTimePicker_ValueChanged;
+            UpdateComboBox();
         }
 
-        /*
-         * Retrieve all available Aircrafts between Deprature Time and Arrival Time @ Constructor call
-         * make ComboBox dataSource = AvailableAircrafts
-         * Change Available Aircrafts Eachtime Time changes
-         * 
-         * First Let's Write Stored Procedure
-         */
+        private void ArrivalTimePicker_ValueChanged(object? sender, EventArgs e)
+        {
+            UpdateComboBox();
+        }
 
-        private void departureTimePicker_ValueChanged(object sender, EventArgs e)
+        private void DepartureTimePicker_ValueChanged(object? sender, EventArgs e)
+        {
+            UpdateComboBox();
+        }
+
+        private void ResetFlightForm()
+        {
+            flightNumberTextBox.Text = "";
+            originTextBox.Text = "";
+            destinationTextBox.Text = "";
+            tripDurationTextBox.Text = ""; // Try Parse
+            costTextBox.Text = ""; // Try Parse
+            businessClassSeatsTextBox.Text = "";
+            economyClassSeatsTextBox.Text = "";
+        }
+
+        private void UpdateComboBox()
         {
             AvailableAircraft = GlobalConfig.Connector.GetAircafts_ByDate(departureTimePicker.Value, arrivalTimePicker.Value);
+            aircraftComboBox.DataSource = new List<AircaftModel>();
             aircraftComboBox.DataSource = AvailableAircraft;
-            aircraftComboBox.DisplayMember = "ModelData";
+            aircraftComboBox.DisplayMember = "PartialModelData";
         }
 
         private void addFlightButton_Click(object sender, EventArgs e)
@@ -61,17 +82,7 @@ namespace FlightReservationUI
             flight = GlobalConfig.Connector.CreateFlight(flight);
 
             ResetFlightForm();
-        }
-
-        private void ResetFlightForm()
-        {
-            flightNumberTextBox.Text = "";
-            originTextBox.Text = "";
-            destinationTextBox.Text = "";
-            tripDurationTextBox.Text = ""; // Try Parse
-            costTextBox.Text = ""; // Try Parse
-            businessClassSeatsTextBox.Text = "";
-            economyClassSeatsTextBox.Text = "";
+            UpdateComboBox();
         }
     }
 }
