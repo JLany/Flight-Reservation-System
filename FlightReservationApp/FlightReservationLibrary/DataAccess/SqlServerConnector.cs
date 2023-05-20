@@ -19,11 +19,11 @@ namespace FlightReservationLibrary.DataAccess
     {
         private readonly string dbName = "Flights";
 
-        public bool AuthenticateUser(AuthenticationModel  authentication)
+        public bool AuthenticateUser(AuthenticationModel authentication)
         {
             bool authenticated;
 
-            using (IDbConnection connection = 
+            using (IDbConnection connection =
                 new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
             {
                 var parameters = new DynamicParameters();
@@ -41,7 +41,7 @@ namespace FlightReservationLibrary.DataAccess
         {
             bool emailExists;
 
-            using (IDbConnection connection = 
+            using (IDbConnection connection =
                 new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
             {
                 var parameters = new DynamicParameters();
@@ -58,7 +58,7 @@ namespace FlightReservationLibrary.DataAccess
         public CustomerModel CreateCustomer(CustomerModel model)
         {
             // open a connection
-            using (IDbConnection connection = 
+            using (IDbConnection connection =
                 new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
             {
                 var parameters = new DynamicParameters();
@@ -86,7 +86,7 @@ namespace FlightReservationLibrary.DataAccess
         {
             CustomerModel output;
 
-            using (IDbConnection connection = 
+            using (IDbConnection connection =
                 new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
             {
                 var parameters = new DynamicParameters();
@@ -146,7 +146,7 @@ namespace FlightReservationLibrary.DataAccess
         {
             var output = new List<FlightTicketModel>();
 
-            using (IDbConnection connection = 
+            using (IDbConnection connection =
                 new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
             {
                 var parameters = new DynamicParameters();
@@ -262,6 +262,24 @@ namespace FlightReservationLibrary.DataAccess
             }
 
             return availableAircrafts;
+
+        }
+
+        public List<AircaftModel> GetAllAircrafts()
+        {
+            List<AircaftModel> Aircrafts = new List<AircaftModel>();
+
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                Aircrafts = 
+                    connection.Query<AircaftModel>("SELECT * FROM Aircraft").ToList();
+            }
+
+            return Aircrafts;
+        }
+
+        public void UpdateAircraft(AircaftModel model)
+        {
 
         }
     }
