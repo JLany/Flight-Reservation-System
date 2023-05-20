@@ -294,4 +294,22 @@ BEGIN
 END
 GO
 
+CREATE PROCEDURE spAircraft_Update
+	@Id int,
+	@SerialNumber varchar(20),
+	@ModelName varchar(50),
+	@NumberOfSeats int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	UPDATE Aircraft
+	SET SerialNumber = @SerialNumber,
+		ModelName = @ModelName,
+		NumberOfSeats = @NumberOfSeats
+	WHERE Id = @Id
+
+END
+GO
+
 ```
