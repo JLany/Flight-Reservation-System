@@ -23,7 +23,7 @@ namespace FlightReservationUI
         public ManageAircrafts()
         {
             InitializeComponent();
-            
+
             AircraftListBox.SelectedIndexChanged += AircraftListBox_SelectedIndexChanged;
             ModifyButton.Click += ModifyButton_Click;
             DeleteAircraftButton.Click += DeleteAircraftButton_Click;
@@ -48,7 +48,6 @@ namespace FlightReservationUI
                 return;
 
             var selectedAircraft = Aircrafts[selectedIndex];
-            UpdateAircraftinMemory(selectedAircraft);
             GlobalConfig.Connector.UpdateAircraft(selectedAircraft);
             ReLoadAircraftsListBox();
         }
@@ -58,7 +57,6 @@ namespace FlightReservationUI
             selectedIndex = AircraftListBox.SelectedIndex;
             var aircraft = Aircrafts[selectedIndex];
 
-            IdTextbox.Text = aircraft.Id.ToString();
             SerialNTextbox.Text = aircraft.SerialNumber;
             ModelNameTextbox.Text = aircraft.ModelName;
             nSeatsTextBox.Text = aircraft.NumberOfSeats.ToString();
@@ -68,29 +66,15 @@ namespace FlightReservationUI
 
         private void ReLoadAircraftsListBox()
         {
-            AircraftListBox.Items.Clear();
-            Aircrafts = GlobalConfig.Connector.GetAllAircrafts();
-
-
-            AircraftListBox.DataSource = Aircrafts;
-            AircraftListBox.DisplayMember = "FullModelData";
+            Aircrafts = GlobalConfig.Connector.GetAllAircrafts(); // Doesn't work in constructor
 
             ResetAircraftData();
-            if (Aircrafts.Count > 0)
-                AircraftListBox.SelectedIndex = selectedIndex; // do i remove this from here?
-        }
-
-        // updates from text boxes
-        private void UpdateAircraftinMemory(AircaftModel aircraft)
-        {
-            aircraft.SerialNumber = SerialNTextbox.Text;
-            aircraft.ModelName = ModelNameTextbox.Text;
-            aircraft.NumberOfSeats = int.Parse(nSeatsTextBox.Text);
+            AircraftListBox.DataSource = Aircrafts;
+            AircraftListBox.DisplayMember = "FullModelData";
         }
 
         private void ResetAircraftData()
         {
-            IdTextbox.Text = "";
             SerialNTextbox.Text = "";
             ModelNameTextbox.Text = "";
             nSeatsTextBox.Text = "";
