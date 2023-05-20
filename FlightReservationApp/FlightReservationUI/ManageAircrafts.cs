@@ -17,6 +17,9 @@ namespace FlightReservationUI
         private List<AircaftModel> Aircrafts;
         private int selectedIndex = 0;
 
+
+        // Make Confirmation Messages On Delete and Modify Btns
+        // Validate Modified Input
         public ManageAircrafts()
         {
             InitializeComponent();
@@ -68,10 +71,11 @@ namespace FlightReservationUI
             AircraftListBox.Items.Clear();
             Aircrafts = GlobalConfig.Connector.GetAllAircrafts();
 
-            foreach(var aircraft in Aircrafts)
-                AircraftListBox.Items.Add(aircraft);
-            
+
+            AircraftListBox.DataSource = Aircrafts;
             AircraftListBox.DisplayMember = "FullModelData";
+
+            ResetAircraftData();
             if (Aircrafts.Count > 0)
                 AircraftListBox.SelectedIndex = selectedIndex; // do i remove this from here?
         }
@@ -82,6 +86,14 @@ namespace FlightReservationUI
             aircraft.SerialNumber = SerialNTextbox.Text;
             aircraft.ModelName = ModelNameTextbox.Text;
             aircraft.NumberOfSeats = int.Parse(nSeatsTextBox.Text);
+        }
+
+        private void ResetAircraftData()
+        {
+            IdTextbox.Text = "";
+            SerialNTextbox.Text = "";
+            ModelNameTextbox.Text = "";
+            nSeatsTextBox.Text = "";
         }
     }
 }
