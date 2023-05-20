@@ -30,6 +30,13 @@ namespace FlightReservationUI
             currentCustomer = customer;
 
             SetUpForm();
+
+            this.FormClosed += BookTicketForm_FormClosed;
+        }
+
+        private void BookTicketForm_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            clientProcess.TicketResponse(null);
         }
 
         private void SetUpForm()

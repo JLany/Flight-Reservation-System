@@ -105,8 +105,11 @@ namespace FlightReservationUI
 
         void ITicketRequester.TicketResponse(FlightTicketModel ticket)
         {
-            tickets.Add(ticket);
-            WireUpTicketsListBox();
+            if (ticket != null)
+            {
+                tickets.Add(ticket);
+                WireUpTicketsListBox();
+            }
 
             this.Enabled = true;
         }
