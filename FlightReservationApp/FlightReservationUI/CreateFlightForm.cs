@@ -47,8 +47,8 @@ namespace FlightReservationUI
             flightNumberTextBox.Text = "";
             originTextBox.Text = "";
             destinationTextBox.Text = "";
-            tripDurationTextBox.Text = ""; // Try Parse
-            costTextBox.Text = ""; // Try Parse
+            tripDurationTextBox.Text = "";
+            costTextBox.Text = "";
             businessClassSeatsTextBox.Text = "";
             economyClassSeatsTextBox.Text = "";
         }
