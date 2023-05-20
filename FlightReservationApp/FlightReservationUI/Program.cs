@@ -16,7 +16,7 @@ namespace FlightReservationUI
 
             GlobalConfig.InitializeConnector();
 
-            // Application.Run(new TicketsDashboardForm("johndoe@example.com"));
+            //Application.Run(new ManageFlights());
 
             new LoginForm().Show();
             Application.Run();
