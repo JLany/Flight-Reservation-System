@@ -180,7 +180,6 @@ namespace FlightReservationLibrary.DataAccess
 
         public AircaftModel CreateAircraft(AircaftModel model)
         {
-            // open a connection
             using (IDbConnection connection =
                 new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
             {
@@ -192,31 +191,16 @@ namespace FlightReservationLibrary.DataAccess
 
                 parameters.Add("@Id", null, dbType: DbType.Int32, direction: ParameterDirection.Output);
 
-                // store, and aquire the new id
                 connection.Execute("dbo.spAircraft_Insert", parameters, commandType: CommandType.StoredProcedure);
 
                 model.Id = parameters.Get<int>("Id");
             }
 
-            // return new model
             return model;
         }
-        /*
-            public int Id { get; set; }
-            public string FlightNumber { get; set; }
-            public string OriginAirport { get; set; }
-            public string DestinationAirport { get; set; }
-            public DateTime DepartureTime { get; set; }
-            public DateTime ArrivalTime { get; set; }
-            public double TripDuration { get; set; }
-            public decimal Cost { get; set; }
-            public AircaftModel Aircaft { get; set; }
-            public int BusinessClassSeats { get; set; }
-            public int EconomyClassSeats { get; set; }
-        */
+
         public FlightModel CreateFlight(FlightModel model)
         {
-            // open a connection
             using (IDbConnection connection =
                 new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
             {
