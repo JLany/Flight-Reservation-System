@@ -324,7 +324,6 @@ END
 GO
 
 
-
 ```
 
 ### Yusuf Badr : 19/05/2023
@@ -346,3 +345,72 @@ END
 GO
 
 ```
+
+
+
+### Yousef Kilany : 5/20/2023 
+______________________________________________________________________
+```
+
+CREATE PROCEDURE spCustomer_CheckAnotherEmailExists
+	@OldEmail nvarchar(100),
+	@NewEmail nvarchar(100)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	declare @Exists bit;
+
+	if exists (
+		select 1 
+		from Customer
+		where Email <> @OldEmail
+			and Email = @NewEmail
+		)
+		set @Exists = 1;
+	else
+		set @Exists = 0;
+
+	select @Exists as NewEmailExists;
+
+END
+GO
+
+
+
+CREATE PROCEDURE spCustomer_Update
+	@Id int,
+	@FirstName nvarchar(50),
+	@MiddleName nvarchar(50),
+	@LastName nvarchar(50),
+	@Email nvarchar(100),
+	@PassportNumber varchar(20),
+	@PhoneNumber varchar(20),
+	@Password nvarchar(100)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	update Customer
+	set 
+		FirstName = @FirstName,
+		MiddleName = @MiddleName,
+		LastName = @LastName,
+		Email = @Email,
+		PassportNumber = @PassportNumber,
+		PhoneNumber = @PhoneNumber,
+		Password = @Password
+
+	where Id = @Id;
+
+END
+GO
+
+
+
+```
+______________________________________________________________________
