@@ -51,7 +51,6 @@ namespace FlightReservationUI
             if (GlobalConfig.Connector.CheckCustomer_EmailExists(customer.Email))
             {
                 errorLabel.Text = "An account already exists with this email.";
-
                 return;
             }
 

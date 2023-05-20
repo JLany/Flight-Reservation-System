@@ -44,7 +44,7 @@ namespace FlightReservationUI
 
         private void LoginButton_Click(object? sender, EventArgs e)
         {
-            var authentication = new AuthenticationModel 
+            var authentication = new AuthenticationModel
             {
                 UserEmail = emailTextBox.Text,
                 Password = passwordTextBox.Text
@@ -54,7 +54,7 @@ namespace FlightReservationUI
 
             if (authenticated)
             {
-                new TicketsDashboardForm(authentication.UserEmail).Show();                
+                new TicketsDashboardForm(authentication.UserEmail).Show();
                 hasChildren = true;
                 this.Close();
             }

@@ -32,6 +32,7 @@
             ticketsLabel = new Label();
             ticketsListBox = new ListBox();
             ticketDetailsGroupBox = new GroupBox();
+            classComboBox = new ComboBox();
             cancelTicketButton = new Button();
             flightGroupBox = new GroupBox();
             tripDurationText = new Label();
@@ -52,7 +53,8 @@
             classLabel = new Label();
             ticketNumberLabel = new Label();
             bookNewTicketButton = new Button();
-            classComboBox = new ComboBox();
+            manageAccountLink = new LinkLabel();
+            messageLabel = new Label();
             ticketDetailsGroupBox.SuspendLayout();
             flightGroupBox.SuspendLayout();
             SuspendLayout();
@@ -103,6 +105,16 @@
             ticketDetailsGroupBox.TabIndex = 23;
             ticketDetailsGroupBox.TabStop = false;
             ticketDetailsGroupBox.Text = "Ticket Details";
+            // 
+            // classComboBox
+            // 
+            classComboBox.Enabled = false;
+            classComboBox.FlatStyle = FlatStyle.System;
+            classComboBox.FormattingEnabled = true;
+            classComboBox.Location = new Point(196, 116);
+            classComboBox.Name = "classComboBox";
+            classComboBox.Size = new Size(185, 38);
+            classComboBox.TabIndex = 27;
             // 
             // cancelTicketButton
             // 
@@ -305,15 +317,26 @@
             bookNewTicketButton.Text = "Book a New Ticket";
             bookNewTicketButton.UseVisualStyleBackColor = false;
             // 
-            // classComboBox
+            // manageAccountLink
             // 
-            classComboBox.Enabled = false;
-            classComboBox.FlatStyle = FlatStyle.System;
-            classComboBox.FormattingEnabled = true;
-            classComboBox.Location = new Point(196, 116);
-            classComboBox.Name = "classComboBox";
-            classComboBox.Size = new Size(185, 38);
-            classComboBox.TabIndex = 27;
+            manageAccountLink.AutoSize = true;
+            manageAccountLink.Location = new Point(980, 38);
+            manageAccountLink.Name = "manageAccountLink";
+            manageAccountLink.Size = new Size(172, 30);
+            manageAccountLink.TabIndex = 26;
+            manageAccountLink.TabStop = true;
+            manageAccountLink.Text = "Manage Account";
+            // 
+            // messageLabel
+            // 
+            messageLabel.AutoSize = true;
+            messageLabel.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            messageLabel.ForeColor = Color.Green;
+            messageLabel.Location = new Point(948, 68);
+            messageLabel.Name = "messageLabel";
+            messageLabel.Size = new Size(207, 21);
+            messageLabel.TabIndex = 27;
+            messageLabel.Text = "Changes Saved Successfully.";
             // 
             // TicketsDashboardForm
             // 
@@ -321,6 +344,8 @@
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.White;
             ClientSize = new Size(1164, 622);
+            Controls.Add(messageLabel);
+            Controls.Add(manageAccountLink);
             Controls.Add(bookNewTicketButton);
             Controls.Add(ticketDetailsGroupBox);
             Controls.Add(ticketsListBox);
@@ -365,5 +390,7 @@
         private Label tripDurationText;
         private Label tripDurationLabel;
         private ComboBox classComboBox;
+        private LinkLabel manageAccountLink;
+        private Label messageLabel;
     }
 }

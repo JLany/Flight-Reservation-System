@@ -19,23 +19,36 @@ namespace FlightReservationUI
     {
         private CustomerModel currentCustomer;
         private List<FlightTicketModel> tickets;
+        private bool hasChildren = false;
 
-        public TicketsDashboardForm(string customerEmail)
+        public TicketsDashboardForm(string customerEmail, string message = "")
         {
             InitializeComponent();
 
             currentCustomer = GlobalConfig.Connector.GetCustomer_ByEmail(customerEmail);
+            messageLabel.Text = message;
 
             WireUpTicketsListBox();
             SetUpTicketDetails();
 
             bookNewTicketButton.Click += BookNewTicketButton_Click;
+            manageAccountLink.LinkClicked += ManageAccountLink_LinkClicked;
             this.FormClosed += TicketsDashboardForm_FormClosed;
+        }
+
+        private void ManageAccountLink_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new ManageAccountForm(currentCustomer).Show();
+            hasChildren = true;
+            this.Close();
         }
 
         private void TicketsDashboardForm_FormClosed(object? sender, FormClosedEventArgs e)
         {
-            new LoginForm().Show();
+            if (!hasChildren) 
+            {
+                new LoginForm().Show();
+            }
         }
 
         private void BookNewTicketButton_Click(object? sender, EventArgs e)

@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net.Sockets;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -55,6 +56,24 @@ namespace FlightReservationLibrary.DataAccess
             return emailExists;
         }
 
+        public bool CheckCustomer_AnotherEmailExists(CustomerModel customer, string newEmail)
+        {
+            bool emailExists;
+
+            using (IDbConnection connection =
+                new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@OldEmail", customer.Email);
+                parameters.Add("@NewEmail", newEmail);
+
+                emailExists = connection.ExecuteScalar<bool>(
+                    "dbo.spCustomer_CheckAnotherEmailExists", parameters, commandType: CommandType.StoredProcedure);
+            }
+
+            return emailExists;
+        }
+
         public bool CheckTicket_Exists(FlightTicketModel ticket)
         {
             bool ticketExists;
@@ -80,7 +99,6 @@ namespace FlightReservationLibrary.DataAccess
                 new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
             {
                 var parameters = new DynamicParameters();
-
                 parameters.Add("@FirstName", model.FirstName);
                 parameters.Add("@MiddleName", model.MiddleName);
                 parameters.Add("@LastName", model.LastName);
@@ -256,6 +274,27 @@ namespace FlightReservationLibrary.DataAccess
             }
 
             return output;
+        }
+
+        public CustomerModel UpdateCustomer(CustomerModel customer)
+        {
+            using (IDbConnection connection =
+                new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@FirstName", customer.FirstName);
+                parameters.Add("@MiddleName", customer.MiddleName);
+                parameters.Add("@LastName", customer.LastName);
+                parameters.Add("@Email", customer.Email);
+                parameters.Add("@PassportNumber", customer.PassportNumber);
+                parameters.Add("@PhoneNumber", customer.PhoneNumber);
+                parameters.Add("@Password", customer.Password);
+
+                connection.Execute("dbo.spCustomer_CheckAnotherEmailExists", parameters
+                    , commandType: CommandType.StoredProcedure);
+            }
+
+            return customer;
         }
                         
         // utility

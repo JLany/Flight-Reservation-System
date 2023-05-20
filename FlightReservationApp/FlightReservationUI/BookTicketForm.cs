@@ -15,7 +15,7 @@ namespace FlightReservationUI
 {
     public partial class BookTicketForm : Form
     {
-        private ITicketRequester clientProcess;
+        private readonly ITicketRequester clientProcess;
         private List<string> availableFlightClasses = new() { "Business", "Economy" };
         private readonly List<string> availableOrigins = GlobalConfig.Connector.Get_AllOrigins();
         private readonly List<string> availableDestinations = GlobalConfig.Connector.Get_AllDestinations();
