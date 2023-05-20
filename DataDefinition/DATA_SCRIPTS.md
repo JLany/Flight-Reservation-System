@@ -412,5 +412,23 @@ GO
 
 
 
+
+CREATE PROCEDURE spFlightTicket_DeleteById
+	@Id int
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	delete 
+	from FlightTicket
+	where Id = @Id;
+
+END
+GO
+
+
+
 ```
 ______________________________________________________________________
