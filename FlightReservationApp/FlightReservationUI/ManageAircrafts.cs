@@ -15,7 +15,7 @@ namespace FlightReservationUI
     public partial class ManageAircrafts : Form
     {
         private List<AircaftModel> Aircrafts;
-        private int selectedIndex;
+        private int selectedIndex = 0;
 
         public ManageAircrafts()
         {
@@ -23,17 +23,45 @@ namespace FlightReservationUI
             
             AircraftListBox.SelectedIndexChanged += AircraftListBox_SelectedIndexChanged;
             ModifyButton.Click += ModifyButton_Click;
+            DeleteAircraftButton.Click += DeleteAircraftButton_Click;
 
             ReLoadAircraftsListBox();
-            AircraftListBox.SelectedIndex = selectedIndex;
+        }
+
+        private void DeleteAircraftButton_Click(object? sender, EventArgs e)
+        {
+            if (Aircrafts.Count == 0)
+                return;
+
+            var selectedAircraft = Aircrafts[selectedIndex];
+            GlobalConfig.Connector.DeleteAircraft_ById(selectedAircraft.Id);
+            Aircrafts.RemoveAt(selectedIndex);
+            ReLoadAircraftsListBox();
         }
 
         private void ModifyButton_Click(object? sender, EventArgs e)
         {
+            if (Aircrafts.Count == 0)
+                return;
 
-
-            throw new NotImplementedException();
+            var selectedAircraft = Aircrafts[selectedIndex];
+            UpdateAircraftinMemory(selectedAircraft);
+            GlobalConfig.Connector.UpdateAircraft(selectedAircraft);
+            ReLoadAircraftsListBox();
         }
+
+        private void AircraftListBox_SelectedIndexChanged(object? sender, EventArgs e)
+        {
+            selectedIndex = AircraftListBox.SelectedIndex;
+            var aircraft = Aircrafts[selectedIndex];
+
+            IdTextbox.Text = aircraft.Id.ToString();
+            SerialNTextbox.Text = aircraft.SerialNumber;
+            ModelNameTextbox.Text = aircraft.ModelName;
+            nSeatsTextBox.Text = aircraft.NumberOfSeats.ToString();
+        }
+
+
 
         private void ReLoadAircraftsListBox()
         {
@@ -44,16 +72,16 @@ namespace FlightReservationUI
                 AircraftListBox.Items.Add(aircraft);
             
             AircraftListBox.DisplayMember = "FullModelData";
+            if (Aircrafts.Count > 0)
+                AircraftListBox.SelectedIndex = selectedIndex; // do i remove this from here?
         }
 
-        private void AircraftListBox_SelectedIndexChanged(object? sender, EventArgs e)
+        // updates from text boxes
+        private void UpdateAircraftinMemory(AircaftModel aircraft)
         {
-            int selectedIndex = AircraftListBox.SelectedIndex;
-            var aircraft = Aircrafts[selectedIndex];
-            IdTextbox.Text = aircraft.Id.ToString();
-            SerialNTextbox.Text = aircraft.SerialNumber;
-            ModelNameTextbox.Text = aircraft.ModelName;
-            nSeatsTextBox.Text = aircraft.NumberOfSeats.ToString();
+            aircraft.SerialNumber = SerialNTextbox.Text;
+            aircraft.ModelName = ModelNameTextbox.Text;
+            aircraft.NumberOfSeats = int.Parse(nSeatsTextBox.Text);
         }
     }
 }
