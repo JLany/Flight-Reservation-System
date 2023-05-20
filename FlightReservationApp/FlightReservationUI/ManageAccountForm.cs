@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace FlightReservationUI
 {
@@ -23,8 +24,23 @@ namespace FlightReservationUI
 
             currentCustomer = customer;
 
+            errorLabel.Text = "";
+            PopulateForm();
+
             saveChangesButton.Click += SaveChangesButton_Click;
             this.FormClosed += ManageAccountForm_FormClosed;
+        }
+
+        private void PopulateForm()
+        {
+            firstNameTextBox.Text = currentCustomer.FirstName;
+            middleNameTextBox.Text = currentCustomer.MiddleName;
+            lastNameTextBox.Text = currentCustomer.LastName;
+            emailTextBox.Text = currentCustomer.Email;
+            passportNumberTextBox.Text = currentCustomer.PassportNumber;
+            phoneNumberTextBox.Text = currentCustomer.PhoneNumber;
+            passwordTextBox.Text = currentCustomer.Password;
+            confirmPasswordTextBox.Text = currentCustomer.Password;
         }
 
         private void ManageAccountForm_FormClosed(object? sender, FormClosedEventArgs e)
@@ -154,8 +170,6 @@ namespace FlightReservationUI
             }
 
             return valid;
-
-            return true;
         }
     }
 }

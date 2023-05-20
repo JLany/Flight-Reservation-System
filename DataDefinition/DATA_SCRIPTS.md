@@ -219,6 +219,7 @@ END
 GO
 
 ```
+<<<<<<< HEAD
 
 
 ### Yousef Kilany : 5/19/2023 
@@ -409,6 +410,99 @@ BEGIN
 
 END
 GO
+=======
+### Shehab Diab : 5/19/2023
+______________________________________________________________________
+
+```
+
+CREATE PROCEDURE spAircraft_Insert
+	@SerialNumber varchar(20),
+	@ModelName varchar(50),
+	@NumberOfSeats int,
+	@Id int = 0 output
+	
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	INSERT INTO Aircraft 
+	VALUES (@SerialNumber, @ModelName, @NumberOfSeats);
+
+	SELECT @Id = SCOPE_IDENTITY();
+END
+GO
+
+CREATE PROCEDURE spAircraft_GetByDate
+	@DepartureTime datetime2(7),
+	@ArrivalTime datetime2(7)
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	SELECT Aircraft.*
+	FROM Aircraft
+	LEFT JOIN Flight
+	ON Aircraft.Id = Flight.AircraftId
+	AND Flight.DepartureTime < @ArrivalTime
+	AND Flight.ArrivalTime > @DepartureTime
+	WHERE Flight.AircraftId IS NULL
+
+END
+GO
+
+CREATE PROCEDURE spFlight_Insert
+	@FlightNumber varchar(20),
+	@OriginAirport varchar(10),
+	@DestinationAirport varchar(10),
+	@DepartureTime datetime2(7),
+	@ArrivalTime datetime2(7),
+	@TripDuration decimal(6, 2),
+	@Cost money,
+	@AircraftId int,
+	@BusinessClassSeats int,
+	@EconomyClassSeats int,
+	@Id int = 0 output
+AS
+BEGIN
+	
+	SET NOCOUNT ON;
+
+	INSERT INTO Flight
+	VALUES (@FlightNumber,
+			@OriginAirport,
+			@DestinationAirport,
+			@DepartureTime,
+			@ArrivalTime,
+			@TripDuration,
+			@Cost,
+			@AircraftId,
+			@BusinessClassSeats,
+			@EconomyClassSeats)
+			
+	SELECT @Id = SCOPE_IDENTITY();
+END
+GO
+
+CREATE PROCEDURE spAircraft_Update
+	@Id int,
+	@SerialNumber varchar(20),
+	@ModelName varchar(50),
+	@NumberOfSeats int
+AS
+BEGIN
+	SET NOCOUNT ON;
+	
+	UPDATE Aircraft
+	SET SerialNumber = @SerialNumber,
+		ModelName = @ModelName,
+		NumberOfSeats = @NumberOfSeats
+	WHERE Id = @Id
+
+END
+GO
 
 
 
@@ -432,3 +526,25 @@ GO
 
 ```
 ______________________________________________________________________
+```
+
+### Shehab Diab : 5/20/2023
+______________________________________________________________________
+
+```
+CREATE PROCEDURE spFlight_UpdateDate
+	@Id int,
+	@DepartureTime datetime2(7),
+	@ArrivalTime datetime2(7)
+AS
+BEGIN
+
+	UPDATE Flight
+	SET 
+	DepartureTime = @DepartureTime,
+	ArrivalTime  = @ArrivalTime
+	WHERE Id = @Id
+END
+GO
+
+```

@@ -36,5 +36,10 @@ namespace FlightReservationLibrary.Models
             int minutes = (int)((int)(TripDuration * 100) % 100 / 100.0 * 60);
             return minutes;
         }
+
+        public string FlightDetails
+        {
+            get => $"{FlightNumber} - {OriginAirport} - {DestinationAirport}";
+        }
     }
 }
