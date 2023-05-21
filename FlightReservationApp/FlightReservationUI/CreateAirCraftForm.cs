@@ -53,7 +53,7 @@ namespace FlightReservationUI
                 return false;
             }
 
-            if (CheckSerialNumberExistence(serialNumberTextBox.Text))
+            if (GlobalConfig.Connector.CheckAircraft_SerialNumberExists(serialNumberTextBox.Text))
             {
                 MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "Serial Number Used");
                 return false;
@@ -79,11 +79,6 @@ namespace FlightReservationUI
             }
 
             return true;
-        }
-
-        private bool CheckSerialNumberExistence(string serialNumber)
-        {
-            return GlobalConfig.Connector.CheckAircraft_SerialNumberExists(serialNumber);
         }
 
     }
