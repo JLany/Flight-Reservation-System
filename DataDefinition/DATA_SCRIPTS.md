@@ -576,3 +576,27 @@ Begin
 
 END
 GO
+
+CREATE PROCEDURE spFlight_CheckFlightNumberExists
+	@FlightNumber varchar(20)
+As
+Begin
+
+	DECLARE @exists bit
+
+	if exists (
+		SELECT 1 FROM Flight
+		WHERE 
+		FlightNumber = @FlightNumber
+	)
+		SET @exists = 1;
+	else
+		SET @exists = 0;
+
+	SELECT @exists AS FlightNumberExists;
+
+END
+GO
+
+
+```
