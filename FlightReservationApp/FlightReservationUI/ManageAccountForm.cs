@@ -74,6 +74,14 @@ namespace FlightReservationUI
                 return;
             }
 
+            currentCustomer.FirstName = firstNameTextBox.Text;
+            currentCustomer.MiddleName = middleNameTextBox.Text;
+            currentCustomer.LastName = lastNameTextBox.Text;
+            currentCustomer.Email = emailTextBox.Text;
+            currentCustomer.PassportNumber = passportNumberTextBox.Text;
+            currentCustomer.PhoneNumber = phoneNumberTextBox.Text;
+            currentCustomer.Password = passwordTextBox.Text;
+
             // Save changes to database (update)
             currentCustomer = GlobalConfig.Connector.UpdateCustomer(currentCustomer);
 
