@@ -548,3 +548,48 @@ END
 GO
 
 ```
+
+
+
+
+### Yousef Kilany : 5/21/2023 
+______________________________________________________________________
+
+```
+
+create table Admin(
+	Id int identity primary key,
+	Email nvarchar(100) not null unique,
+	Password nvarchar(100) not null
+);
+
+
+CREATE PROCEDURE spAdmin_Authenticate
+	@Email nvarchar(100),
+	@Password nvarchar(100)
+
+AS
+BEGIN
+
+	SET NOCOUNT ON;
+
+	declare @Authenticated bit;
+
+	if exists (
+		select * from Admin
+		where Email = @Email 
+			and Admin.Password = @Password)
+
+		set @Authenticated = 1;
+
+	else 
+		set @Authenticated = 0;
+
+	select @Authenticated as UserAuthenticated
+
+END
+GO
+
+```
+
+______________________________________________________________________
