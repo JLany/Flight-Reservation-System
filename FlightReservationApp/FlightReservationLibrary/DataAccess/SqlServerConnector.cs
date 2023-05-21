@@ -494,5 +494,20 @@ namespace FlightReservationLibrary.DataAccess
             return serialNumberExists;
         }
 
+        public bool CheckFlight_NumberExists(string flightNumber)
+        {
+            bool flightNumberExists;
+
+            using (IDbConnection connection = new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@FlightNumber", flightNumber);
+
+                flightNumberExists = connection.ExecuteScalar<bool>
+                    ("dbo.spFlight_CheckFlightNumberExists", parameters, commandType: CommandType.StoredProcedure);
+            }
+
+            return flightNumberExists;
+        }
     }
 }
