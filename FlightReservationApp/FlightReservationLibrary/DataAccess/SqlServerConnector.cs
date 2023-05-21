@@ -21,6 +21,24 @@ namespace FlightReservationLibrary.DataAccess
     {
         private readonly string dbName = "Flights";
 
+        public bool AuthenticateAdmin(AuthenticationModel authentication)
+        {
+            bool authenticated;
+
+            using (IDbConnection connection =
+                new System.Data.SqlClient.SqlConnection(GlobalConfig.ConnectionString(dbName)))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@Email", authentication.UserEmail);
+                parameters.Add("@Password", authentication.Password);
+
+                authenticated = connection.ExecuteScalar<bool>(
+                    "dbo.spAdmin_Authenticate", parameters, commandType: CommandType.StoredProcedure);
+            }
+
+            return authenticated;
+        }
+
         public bool AuthenticateUser(AuthenticationModel authentication)
         {
             bool authenticated;

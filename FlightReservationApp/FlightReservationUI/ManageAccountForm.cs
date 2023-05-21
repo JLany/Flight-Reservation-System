@@ -1,5 +1,6 @@
 ﻿using FlightReservationLibrary;
 using FlightReservationLibrary.Models;
+using FlightReservationUI.Communication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -7,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
@@ -62,26 +64,18 @@ namespace FlightReservationUI
                 return;
             }
 
-            var customer = new CustomerModel
-            {
-                FirstName = firstNameTextBox.Text,
-                MiddleName = middleNameTextBox.Text,
-                LastName = lastNameTextBox.Text,
-                Email = emailTextBox.Text,
-                PassportNumber = passportNumberTextBox.Text,
-                PhoneNumber = phoneNumberTextBox.Text,
-                Password = passwordTextBox.Text
-            };
+            string newEmail = emailTextBox.Text;
 
             // Check if the new mail exists in the database (other than the old one)
-            if (GlobalConfig.Connector.CheckCustomer_AnotherEmailExists(currentCustomer, customer.Email))
+            if (GlobalConfig.Connector.CheckCustomer_AnotherEmailExists(currentCustomer, newEmail))
             {
-                errorLabel.Text = "Another account already exists with this email.";
+                MessageController.DisplayLabelErrorMessage(errorLabel
+                    , "Another account already exists with this email.");
                 return;
             }
 
             // Save changes to database (update)
-            customer = GlobalConfig.Connector.UpdateCustomer(customer);
+            currentCustomer = GlobalConfig.Connector.UpdateCustomer(currentCustomer);
 
             saved = true;
             this.Close();
@@ -139,6 +133,12 @@ namespace FlightReservationUI
                 valid = false;
             }
 
+            if (!IsValidEmail(emailTextBox.Text))
+            {
+                errorLabel.Text = "Invalid email.";
+                valid = false;
+            }
+
             if (passportNumberTextBox.Text.Length < 1)
             {
                 errorLabel.Text = "Passport number too short.";
@@ -170,6 +170,13 @@ namespace FlightReservationUI
             }
 
             return valid;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            var validEmail = new
+                Regex("^[\\w!#$%&'*+/=?^`{|}~-]+(\\.[\\w!#$%&'*+/=?^`{|}~-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,63}$");
+            return validEmail.IsMatch(email);
         }
     }
 }

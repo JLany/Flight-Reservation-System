@@ -1,5 +1,6 @@
 ﻿using FlightReservationLibrary;
 using FlightReservationLibrary.Models;
+using FlightReservationUI.Communication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -50,7 +52,8 @@ namespace FlightReservationUI
 
             if (GlobalConfig.Connector.CheckCustomer_EmailExists(customer.Email))
             {
-                errorLabel.Text = "An account already exists with this email.";
+                MessageController.DisplayLabelErrorMessage(errorLabel
+                    , "An account already exists with this email.");
                 return;
             }
 
@@ -81,15 +84,19 @@ namespace FlightReservationUI
 
             if (firstNameTextBox.Text.Length < 1)
             {
-                errorLabel.Text = "First name too short.";
+                MessageController.DisplayLabelErrorMessage(errorLabel
+                    , "First name too short.");
                 valid = false;
             }
 
             if (firstNameTextBox.Text.Length > 50)
             {
-                errorLabel.Text = "First name too long.";
+                MessageController.DisplayLabelErrorMessage(errorLabel
+                    , "First name too long.");
                 valid = false;
             }
+
+            // TODO - Display error messages using MessageController
 
             if (middleNameTextBox.Text.Length < 1)
             {
@@ -127,6 +134,12 @@ namespace FlightReservationUI
                 valid = false;
             }
 
+            if (!IsValidEmail(emailTextBox.Text))
+            {
+                errorLabel.Text = "Invalid email.";
+                valid = false;
+            }
+
             if (passportNumberTextBox.Text.Length < 1)
             {
                 errorLabel.Text = "Passport number too short.";
@@ -158,6 +171,13 @@ namespace FlightReservationUI
             }
 
             return valid;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            var validEmail = new 
+                Regex("^[\\w!#$%&'*+/=?^`{|}~-]+(\\.[\\w!#$%&'*+/=?^`{|}~-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,63}$");
+            return validEmail.IsMatch(email);
         }
     }
 }
