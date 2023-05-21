@@ -45,10 +45,10 @@ namespace FlightReservationUI
                 return;
             }
 
-            var response = MessageBox.Show("Are you sure you want to cancel this ticket?", "Confirm"
-                , MessageBoxButtons.YesNo);
+            bool confirmed = MessageController.ConfirmOperationMessageBox(
+                "Are you sure you want to cancel this ticket?", "Cancel Ticket");
 
-            if (response == DialogResult.Yes)
+            if (confirmed)
             {
                 // Delete ticket from database
                 GlobalConfig.Connector.DeleteTicket(ticket);
@@ -70,8 +70,8 @@ namespace FlightReservationUI
             if (ticket.Flight.DepartureTime.Subtract(DateTime.Now).TotalHours < 24) 
             {
                 ableToCancel = false;
-                MessageBox.Show("You can only cancel a flight before 24 hours or more of its departure time.",
-                    "Denied", MessageBoxButtons.OK);
+                MessageBox.Show("You can only cancel a ticket 24 hours or more before the flight.",
+                    "Cancelation Denied", MessageBoxButtons.OK);
             }
 
             return ableToCancel;

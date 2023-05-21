@@ -1,5 +1,6 @@
 ﻿using FlightReservationLibrary;
 using FlightReservationLibrary.Models;
+using FlightReservationUI.Communication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -51,7 +52,8 @@ namespace FlightReservationUI
 
             if (GlobalConfig.Connector.CheckCustomer_EmailExists(customer.Email))
             {
-                errorLabel.Text = "An account already exists with this email.";
+                MessageController.DisplayLabelErrorMessage(errorLabel
+                    , "An account already exists with this email.");
                 return;
             }
 
@@ -82,15 +84,19 @@ namespace FlightReservationUI
 
             if (firstNameTextBox.Text.Length < 1)
             {
-                errorLabel.Text = "First name too short.";
+                MessageController.DisplayLabelErrorMessage(errorLabel
+                    , "First name too short.");
                 valid = false;
             }
 
             if (firstNameTextBox.Text.Length > 50)
             {
-                errorLabel.Text = "First name too long.";
+                MessageController.DisplayLabelErrorMessage(errorLabel
+                    , "First name too long.");
                 valid = false;
             }
+
+            // TODO - Display error messages using MessageController
 
             if (middleNameTextBox.Text.Length < 1)
             {

@@ -1,5 +1,6 @@
 ﻿using FlightReservationLibrary;
 using FlightReservationLibrary.Models;
+using FlightReservationUI.Communication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -23,11 +24,11 @@ namespace FlightReservationUI
             errorLabel.Text = "";
 
             loginButton.Click += LoginButton_Click;
-            signUpLink.Click += SignUpLink_Click;
+            signUpLink.LinkClicked += SignUpLink_LinkClicked;
             this.FormClosed += LoginForm_FormClosed;
         }
 
-        private void SignUpLink_Click(object? sender, EventArgs e)
+        private void SignUpLink_LinkClicked(object? sender, EventArgs e)
         {
             new SignUpForm().Show();
             hasChildren = true;
@@ -64,7 +65,7 @@ namespace FlightReservationUI
             }
             else
             {
-                errorLabel.Text = "Incorrect email or password.";
+                MessageController.DisplayLabelErrorMessage(errorLabel, "Invalid email or password.");
             }
         }
     }

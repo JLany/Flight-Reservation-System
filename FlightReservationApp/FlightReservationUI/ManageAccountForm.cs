@@ -1,5 +1,6 @@
 ﻿using FlightReservationLibrary;
 using FlightReservationLibrary.Models;
+using FlightReservationUI.Communication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -77,7 +78,8 @@ namespace FlightReservationUI
             // Check if the new mail exists in the database (other than the old one)
             if (GlobalConfig.Connector.CheckCustomer_AnotherEmailExists(currentCustomer, customer.Email))
             {
-                errorLabel.Text = "Another account already exists with this email.";
+                MessageController.DisplayLabelErrorMessage(errorLabel
+                    , "Another account already exists with this email.");
                 return;
             }
 

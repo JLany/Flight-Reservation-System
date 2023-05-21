@@ -91,7 +91,8 @@ namespace FlightReservationUI
             bool bookedOnThisFlight = GlobalConfig.Connector.CheckTicket_Exists(ticket);
             if (bookedOnThisFlight)
             {
-                errorLabel.Text = "You have already booked a ticket on this flight.";
+                MessageController.DisplayLabelErrorMessage(errorLabel
+                    , "You have already booked a ticket on this flight.");
 
                 return;
             }
