@@ -539,6 +539,8 @@ CREATE PROCEDURE spFlight_UpdateDate
 AS
 BEGIN
 
+	SET NOCOUNT ON;
+
 	UPDATE Flight
 	SET 
 	DepartureTime = @DepartureTime,
@@ -548,3 +550,29 @@ END
 GO
 
 ```
+
+### Shehab Diab : 5/21/2023
+______________________________________________________________________
+
+```
+
+CREATE PROCEDURE spAircraft_CheckSerialNumberExists
+	@SerialNumber varchar(20)
+As
+Begin
+
+	DECLARE @exists bit
+
+	if exists (
+		SELECT 1 FROM Aircraft
+		WHERE 
+		SerialNumber = @SerialNumber
+	)
+		SET @exists = 1;
+	else
+		SET @exists = 0;
+
+	SELECT @exists AS SerialNumberExists;
+
+END
+GO
