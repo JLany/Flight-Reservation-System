@@ -64,19 +64,10 @@ namespace FlightReservationUI
                 return;
             }
 
-            var customer = new CustomerModel
-            {
-                FirstName = firstNameTextBox.Text,
-                MiddleName = middleNameTextBox.Text,
-                LastName = lastNameTextBox.Text,
-                Email = emailTextBox.Text,
-                PassportNumber = passportNumberTextBox.Text,
-                PhoneNumber = phoneNumberTextBox.Text,
-                Password = passwordTextBox.Text
-            };
+            string newEmail = emailTextBox.Text;
 
             // Check if the new mail exists in the database (other than the old one)
-            if (GlobalConfig.Connector.CheckCustomer_AnotherEmailExists(currentCustomer, customer.Email))
+            if (GlobalConfig.Connector.CheckCustomer_AnotherEmailExists(currentCustomer, newEmail))
             {
                 MessageController.DisplayLabelErrorMessage(errorLabel
                     , "Another account already exists with this email.");
@@ -84,7 +75,7 @@ namespace FlightReservationUI
             }
 
             // Save changes to database (update)
-            customer = GlobalConfig.Connector.UpdateCustomer(customer);
+            currentCustomer = GlobalConfig.Connector.UpdateCustomer(currentCustomer);
 
             saved = true;
             this.Close();
