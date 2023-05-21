@@ -50,11 +50,15 @@ namespace FlightReservationUI
                 Password = passwordTextBox.Text
             };
 
-            bool authenticated = GlobalConfig.Connector.AuthenticateUser(authentication);
-
-            if (authenticated)
+            if (GlobalConfig.Connector.AuthenticateUser(authentication))
             {
                 new TicketsDashboardForm(authentication.UserEmail).Show();
+                hasChildren = true;
+                this.Close();
+            }
+            else if (GlobalConfig.Connector.AuthenticateAdmin(authentication))
+            {
+                new AdminMainForm().Show();
                 hasChildren = true;
                 this.Close();
             }
