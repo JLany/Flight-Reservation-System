@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using FlightReservationLibrary;
 using FlightReservationLibrary.Models;
+using FlightReservationUI.Communication;
 
 namespace FlightReservationUI
 {
@@ -17,13 +18,20 @@ namespace FlightReservationUI
         public CreateAirCraftForm()
         {
             InitializeComponent();
+
+            this.FormClosed += CreateAirCraftForm_FormClosed;
+        }
+
+        private void CreateAirCraftForm_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            new ManageAircrafts().Show();
         }
 
         private void addAircraftButton_Click(object sender, EventArgs e)
         {
+            if (!CheckValidInputs())
+                return;
 
-            // TODO - SerialNumber existence
-            // TODO - validate nSeats
             var aircraft = new AircaftModel
             {
                 SerialNumber = serialNumberTextBox.Text,
@@ -33,16 +41,50 @@ namespace FlightReservationUI
 
             aircraft = GlobalConfig.Connector.CreateAircraft(aircraft);
 
-            resetAircraftForm();
-
-            // TODO - Redirect To Dashboard
+            this.Close();
         }
 
-        private void resetAircraftForm()
+
+        private bool CheckValidInputs()
         {
-            serialNumberTextBox.Text = "";
-            modelTextBox.Text = "";
-            numberOfSeatsTextBox.Text = "";
+            if (serialNumberTextBox.Text.Length == 0)
+            {
+                MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "Serial Number Is Not Valid");
+                return false;
+            }
+
+            if (CheckSerialNumberExistence(serialNumberTextBox.Text))
+            {
+                MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "Serial Number Used");
+                return false;
+            }
+
+            if (modelTextBox.Text.Length < 4 || modelTextBox.Text.Length > 40)
+            {
+                MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "ModelName is not valid");
+                return false;
+            }
+
+            int nSeats;
+            if (!int.TryParse(numberOfSeatsTextBox.Text, out nSeats))
+            {
+                MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "Number of Seats is Not Valid");
+                return false;
+            }
+
+            if (nSeats > 180 || nSeats < 100)
+            {
+                MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "Number of Seats is not Valid");
+                return false;
+            }
+
+            return true;
         }
+
+        private bool CheckSerialNumberExistence(string serialNumber)
+        {
+            return GlobalConfig.Connector.CheckAircraft_SerialNumberExists(serialNumber);
+        }
+
     }
 }

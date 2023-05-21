@@ -1,5 +1,6 @@
 ﻿using FlightReservationLibrary;
 using FlightReservationLibrary.Models;
+using FlightReservationUI.Communication;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace FlightReservationUI
     {
         private List<AircaftModel> Aircrafts;
         private int selectedIndex = 0;
+        private bool hasChildren = false;
 
 
         // Make Confirmation Messages On Delete and Modify Btns
@@ -26,31 +28,44 @@ namespace FlightReservationUI
 
             AircraftListBox.SelectedIndexChanged += AircraftListBox_SelectedIndexChanged;
             ModifyButton.Click += ModifyButton_Click;
-            DeleteAircraftButton.Click += DeleteAircraftButton_Click;
+            AddAircraftButton.Click += AddAircraftButton_Click;
+            this.FormClosed += ManageAircrafts_FormClosed;
 
             ReLoadAircraftsListBox();
         }
 
-        private void DeleteAircraftButton_Click(object? sender, EventArgs e)
+        private void ManageAircrafts_FormClosed(object? sender, FormClosedEventArgs e)
         {
-            if (Aircrafts.Count == 0)
-                return;
+            if (!hasChildren)
+                new AdminMainForm().Show();
+        }
 
-            var selectedAircraft = Aircrafts[selectedIndex];
-            GlobalConfig.Connector.DeleteAircraft_ById(selectedAircraft.Id);
-            Aircrafts.RemoveAt(selectedIndex);
-            ReLoadAircraftsListBox();
+        private void AddAircraftButton_Click(object? sender, EventArgs e)
+        {
+            new CreateAirCraftForm().Show();
+            hasChildren = true;
+            this.Close();
         }
 
         private void ModifyButton_Click(object? sender, EventArgs e)
         {
-            if (Aircrafts.Count == 0)
+            if (!CheckValidInputs())
                 return;
+
+            const string questionMessage = "Do You Really want to Modify?";
+            const string windowTitle = "Confirm Modification";
+            if (!MessageController.ConfirmOperationMessageBox(questionMessage, windowTitle))
+            {
+                ReLoadAircraftsListBox();
+                return;
+            }
 
             var selectedAircraft = Aircrafts[selectedIndex];
             UpdateInMemory(selectedAircraft);
             GlobalConfig.Connector.UpdateAircraft(selectedAircraft);
             ReLoadAircraftsListBox();
+
+            MessageController.DisplayLabelSuccessMessage(ReplyMessageLabel, "Modified Successfully");
         }
 
         private void AircraftListBox_SelectedIndexChanged(object? sender, EventArgs e)
@@ -67,7 +82,7 @@ namespace FlightReservationUI
 
         private void ReLoadAircraftsListBox()
         {
-            Aircrafts = GlobalConfig.Connector.GetAllAircrafts(); // Doesn't work in constructor
+            Aircrafts = GlobalConfig.Connector.GetAllAircrafts(); // Doesn't work in constructor >> why?
 
             ResetAircraftData();
             AircraftListBox.DataSource = Aircrafts;
@@ -86,6 +101,57 @@ namespace FlightReservationUI
             SerialNTextbox.Text = "";
             ModelNameTextbox.Text = "";
             nSeatsTextBox.Text = "";
+        }
+
+
+        // --------------------------- validation --------------------
+
+        private bool CheckValidInputs()
+        {
+            if (Aircrafts.Count == 0)
+            {
+                MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "There are No Existing Aircrafts");
+                return false;
+            }
+
+            var aircraft = Aircrafts[selectedIndex];
+            if (CheckSerialNumberExistence(aircraft.Id, SerialNTextbox.Text))
+            {
+                MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "Serial Number Used");
+                return false;
+            }
+
+            if (ModelNameTextbox.Text.Length < 4 || ModelNameTextbox.Text.Length > 40)
+            {
+                MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "ModelName is not valid");
+                return false;
+            }
+
+            int nSeats;
+            if (!int.TryParse(nSeatsTextBox.Text, out nSeats))
+            {
+                MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "Number of Seats is Not Valid");
+                return false;
+            }
+
+            if (nSeats > 180 || nSeats < 100)
+            {
+                MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "Number of Seats is not Valid");
+                return false;
+            }
+
+            return true;
+        }
+
+        private bool CheckSerialNumberExistence(int ModifiedAircraftId, string newSerialNumber)
+        {
+            foreach (var aircraft in Aircrafts)
+            {
+                if (aircraft.Id != ModifiedAircraftId && aircraft.SerialNumber == newSerialNumber)
+                    return true;
+            }
+
+            return false;
         }
     }
 }
