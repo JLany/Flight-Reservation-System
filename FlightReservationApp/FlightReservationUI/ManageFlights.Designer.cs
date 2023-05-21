@@ -28,305 +28,343 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.FlightBox = new System.Windows.Forms.GroupBox();
-            this.AircraftTextBox = new System.Windows.Forms.TextBox();
-            this.EconomyClassSeatsTextBox = new System.Windows.Forms.TextBox();
-            this.TripDurationTextBox = new System.Windows.Forms.TextBox();
-            this.ArrivalTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.economyClassSeatsLabel = new System.Windows.Forms.Label();
-            this.DepartureTimePicker = new System.Windows.Forms.DateTimePicker();
-            this.tripDurationLabel = new System.Windows.Forms.Label();
-            this.BusinessClassSeatsTextBox = new System.Windows.Forms.TextBox();
-            this.arrivalTimeLabel = new System.Windows.Forms.Label();
-            this.businessClassSeatsLabel = new System.Windows.Forms.Label();
-            this.departureTimeLabel = new System.Windows.Forms.Label();
-            this.aircraftLabel = new System.Windows.Forms.Label();
-            this.CostTextBox = new System.Windows.Forms.TextBox();
-            this.costLabel = new System.Windows.Forms.Label();
-            this.DestinationTextBox = new System.Windows.Forms.TextBox();
-            this.flightNumberLabel = new System.Windows.Forms.Label();
-            this.FlightNumberTextBox = new System.Windows.Forms.TextBox();
-            this.destinationLabel = new System.Windows.Forms.Label();
-            this.originLabel = new System.Windows.Forms.Label();
-            this.OriginTextBox = new System.Windows.Forms.TextBox();
-            this.FlightsListBox = new System.Windows.Forms.ListBox();
-            this.ModifyButton = new System.Windows.Forms.Button();
-            this.CancelFlightButton = new System.Windows.Forms.Button();
-            this.AddFlightButton = new System.Windows.Forms.Button();
-            this.FlightBox.SuspendLayout();
-            this.SuspendLayout();
+            FlightBox = new GroupBox();
+            AircraftTextBox = new TextBox();
+            EconomyClassSeatsTextBox = new TextBox();
+            TripDurationTextBox = new TextBox();
+            ArrivalTimePicker = new DateTimePicker();
+            economyClassSeatsLabel = new Label();
+            DepartureTimePicker = new DateTimePicker();
+            tripDurationLabel = new Label();
+            BusinessClassSeatsTextBox = new TextBox();
+            arrivalTimeLabel = new Label();
+            businessClassSeatsLabel = new Label();
+            departureTimeLabel = new Label();
+            aircraftLabel = new Label();
+            CostTextBox = new TextBox();
+            costLabel = new Label();
+            DestinationTextBox = new TextBox();
+            flightNumberLabel = new Label();
+            FlightNumberTextBox = new TextBox();
+            destinationLabel = new Label();
+            originLabel = new Label();
+            OriginTextBox = new TextBox();
+            FlightsListBox = new ListBox();
+            ModifyButton = new Button();
+            CancelFlightButton = new Button();
+            AddFlightButton = new Button();
+            CancelReplyMessageLabel = new Label();
+            ModifyReplyMessageLabel = new Label();
+            FlightBox.SuspendLayout();
+            SuspendLayout();
             // 
             // FlightBox
             // 
-            this.FlightBox.Controls.Add(this.AircraftTextBox);
-            this.FlightBox.Controls.Add(this.EconomyClassSeatsTextBox);
-            this.FlightBox.Controls.Add(this.TripDurationTextBox);
-            this.FlightBox.Controls.Add(this.ArrivalTimePicker);
-            this.FlightBox.Controls.Add(this.economyClassSeatsLabel);
-            this.FlightBox.Controls.Add(this.DepartureTimePicker);
-            this.FlightBox.Controls.Add(this.tripDurationLabel);
-            this.FlightBox.Controls.Add(this.BusinessClassSeatsTextBox);
-            this.FlightBox.Controls.Add(this.arrivalTimeLabel);
-            this.FlightBox.Controls.Add(this.businessClassSeatsLabel);
-            this.FlightBox.Controls.Add(this.departureTimeLabel);
-            this.FlightBox.Controls.Add(this.aircraftLabel);
-            this.FlightBox.Controls.Add(this.CostTextBox);
-            this.FlightBox.Controls.Add(this.costLabel);
-            this.FlightBox.Controls.Add(this.DestinationTextBox);
-            this.FlightBox.Controls.Add(this.flightNumberLabel);
-            this.FlightBox.Controls.Add(this.FlightNumberTextBox);
-            this.FlightBox.Controls.Add(this.destinationLabel);
-            this.FlightBox.Controls.Add(this.originLabel);
-            this.FlightBox.Controls.Add(this.OriginTextBox);
-            this.FlightBox.Location = new System.Drawing.Point(429, -1);
-            this.FlightBox.Name = "FlightBox";
-            this.FlightBox.Size = new System.Drawing.Size(402, 503);
-            this.FlightBox.TabIndex = 0;
-            this.FlightBox.TabStop = false;
-            this.FlightBox.Text = " Flight Details";
+            FlightBox.Controls.Add(AircraftTextBox);
+            FlightBox.Controls.Add(EconomyClassSeatsTextBox);
+            FlightBox.Controls.Add(TripDurationTextBox);
+            FlightBox.Controls.Add(ArrivalTimePicker);
+            FlightBox.Controls.Add(economyClassSeatsLabel);
+            FlightBox.Controls.Add(DepartureTimePicker);
+            FlightBox.Controls.Add(tripDurationLabel);
+            FlightBox.Controls.Add(BusinessClassSeatsTextBox);
+            FlightBox.Controls.Add(arrivalTimeLabel);
+            FlightBox.Controls.Add(businessClassSeatsLabel);
+            FlightBox.Controls.Add(departureTimeLabel);
+            FlightBox.Controls.Add(aircraftLabel);
+            FlightBox.Controls.Add(CostTextBox);
+            FlightBox.Controls.Add(costLabel);
+            FlightBox.Controls.Add(DestinationTextBox);
+            FlightBox.Controls.Add(flightNumberLabel);
+            FlightBox.Controls.Add(FlightNumberTextBox);
+            FlightBox.Controls.Add(destinationLabel);
+            FlightBox.Controls.Add(originLabel);
+            FlightBox.Controls.Add(OriginTextBox);
+            FlightBox.Location = new Point(375, -1);
+            FlightBox.Margin = new Padding(3, 2, 3, 2);
+            FlightBox.Name = "FlightBox";
+            FlightBox.Padding = new Padding(3, 2, 3, 2);
+            FlightBox.Size = new Size(352, 360);
+            FlightBox.TabIndex = 0;
+            FlightBox.TabStop = false;
+            FlightBox.Text = " Flight Details";
             // 
             // AircraftTextBox
             // 
-            this.AircraftTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.AircraftTextBox.Location = new System.Drawing.Point(200, 354);
-            this.AircraftTextBox.Name = "AircraftTextBox";
-            this.AircraftTextBox.ReadOnly = true;
-            this.AircraftTextBox.Size = new System.Drawing.Size(195, 27);
-            this.AircraftTextBox.TabIndex = 55;
+            AircraftTextBox.BorderStyle = BorderStyle.FixedSingle;
+            AircraftTextBox.Location = new Point(175, 266);
+            AircraftTextBox.Margin = new Padding(3, 2, 3, 2);
+            AircraftTextBox.Name = "AircraftTextBox";
+            AircraftTextBox.ReadOnly = true;
+            AircraftTextBox.Size = new Size(171, 23);
+            AircraftTextBox.TabIndex = 55;
             // 
             // EconomyClassSeatsTextBox
             // 
-            this.EconomyClassSeatsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.EconomyClassSeatsTextBox.Location = new System.Drawing.Point(201, 436);
-            this.EconomyClassSeatsTextBox.Name = "EconomyClassSeatsTextBox";
-            this.EconomyClassSeatsTextBox.ReadOnly = true;
-            this.EconomyClassSeatsTextBox.Size = new System.Drawing.Size(195, 27);
-            this.EconomyClassSeatsTextBox.TabIndex = 54;
+            EconomyClassSeatsTextBox.BorderStyle = BorderStyle.FixedSingle;
+            EconomyClassSeatsTextBox.Location = new Point(176, 327);
+            EconomyClassSeatsTextBox.Margin = new Padding(3, 2, 3, 2);
+            EconomyClassSeatsTextBox.Name = "EconomyClassSeatsTextBox";
+            EconomyClassSeatsTextBox.ReadOnly = true;
+            EconomyClassSeatsTextBox.Size = new Size(171, 23);
+            EconomyClassSeatsTextBox.TabIndex = 54;
             // 
             // TripDurationTextBox
             // 
-            this.TripDurationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.TripDurationTextBox.Location = new System.Drawing.Point(200, 309);
-            this.TripDurationTextBox.Name = "TripDurationTextBox";
-            this.TripDurationTextBox.ReadOnly = true;
-            this.TripDurationTextBox.Size = new System.Drawing.Size(196, 27);
-            this.TripDurationTextBox.TabIndex = 50;
+            TripDurationTextBox.BorderStyle = BorderStyle.FixedSingle;
+            TripDurationTextBox.Location = new Point(175, 232);
+            TripDurationTextBox.Margin = new Padding(3, 2, 3, 2);
+            TripDurationTextBox.Name = "TripDurationTextBox";
+            TripDurationTextBox.ReadOnly = true;
+            TripDurationTextBox.Size = new Size(172, 23);
+            TripDurationTextBox.TabIndex = 50;
             // 
             // ArrivalTimePicker
             // 
-            this.ArrivalTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.ArrivalTimePicker.Location = new System.Drawing.Point(201, 267);
-            this.ArrivalTimePicker.MaxDate = new System.DateTime(2025, 12, 25, 0, 0, 0, 0);
-            this.ArrivalTimePicker.MinDate = new System.DateTime(2023, 5, 16, 0, 0, 0, 0);
-            this.ArrivalTimePicker.Name = "ArrivalTimePicker";
-            this.ArrivalTimePicker.Size = new System.Drawing.Size(195, 27);
-            this.ArrivalTimePicker.TabIndex = 49;
+            ArrivalTimePicker.Format = DateTimePickerFormat.Time;
+            ArrivalTimePicker.Location = new Point(176, 200);
+            ArrivalTimePicker.Margin = new Padding(3, 2, 3, 2);
+            ArrivalTimePicker.MaxDate = new DateTime(2025, 12, 25, 0, 0, 0, 0);
+            ArrivalTimePicker.MinDate = new DateTime(2023, 5, 16, 0, 0, 0, 0);
+            ArrivalTimePicker.Name = "ArrivalTimePicker";
+            ArrivalTimePicker.Size = new Size(171, 23);
+            ArrivalTimePicker.TabIndex = 49;
             // 
             // economyClassSeatsLabel
             // 
-            this.economyClassSeatsLabel.AutoSize = true;
-            this.economyClassSeatsLabel.Location = new System.Drawing.Point(15, 438);
-            this.economyClassSeatsLabel.Name = "economyClassSeatsLabel";
-            this.economyClassSeatsLabel.Size = new System.Drawing.Size(146, 20);
-            this.economyClassSeatsLabel.TabIndex = 53;
-            this.economyClassSeatsLabel.Text = "Economy Class Seats";
+            economyClassSeatsLabel.AutoSize = true;
+            economyClassSeatsLabel.Location = new Point(13, 328);
+            economyClassSeatsLabel.Name = "economyClassSeatsLabel";
+            economyClassSeatsLabel.Size = new Size(117, 15);
+            economyClassSeatsLabel.TabIndex = 53;
+            economyClassSeatsLabel.Text = "Economy Class Seats";
             // 
             // DepartureTimePicker
             // 
-            this.DepartureTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.DepartureTimePicker.Location = new System.Drawing.Point(201, 219);
-            this.DepartureTimePicker.MaxDate = new System.DateTime(2025, 12, 25, 0, 0, 0, 0);
-            this.DepartureTimePicker.MinDate = new System.DateTime(2023, 5, 16, 0, 0, 0, 0);
-            this.DepartureTimePicker.Name = "DepartureTimePicker";
-            this.DepartureTimePicker.Size = new System.Drawing.Size(195, 27);
-            this.DepartureTimePicker.TabIndex = 48;
+            DepartureTimePicker.Format = DateTimePickerFormat.Time;
+            DepartureTimePicker.Location = new Point(176, 164);
+            DepartureTimePicker.Margin = new Padding(3, 2, 3, 2);
+            DepartureTimePicker.MaxDate = new DateTime(2025, 12, 25, 0, 0, 0, 0);
+            DepartureTimePicker.MinDate = new DateTime(2023, 5, 16, 0, 0, 0, 0);
+            DepartureTimePicker.Name = "DepartureTimePicker";
+            DepartureTimePicker.Size = new Size(171, 23);
+            DepartureTimePicker.TabIndex = 48;
             // 
             // tripDurationLabel
             // 
-            this.tripDurationLabel.AutoSize = true;
-            this.tripDurationLabel.Location = new System.Drawing.Point(14, 309);
-            this.tripDurationLabel.Name = "tripDurationLabel";
-            this.tripDurationLabel.Size = new System.Drawing.Size(96, 20);
-            this.tripDurationLabel.TabIndex = 47;
-            this.tripDurationLabel.Text = "Trip Duration";
+            tripDurationLabel.AutoSize = true;
+            tripDurationLabel.Location = new Point(12, 232);
+            tripDurationLabel.Name = "tripDurationLabel";
+            tripDurationLabel.Size = new Size(75, 15);
+            tripDurationLabel.TabIndex = 47;
+            tripDurationLabel.Text = "Trip Duration";
             // 
             // BusinessClassSeatsTextBox
             // 
-            this.BusinessClassSeatsTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.BusinessClassSeatsTextBox.Location = new System.Drawing.Point(201, 393);
-            this.BusinessClassSeatsTextBox.Name = "BusinessClassSeatsTextBox";
-            this.BusinessClassSeatsTextBox.ReadOnly = true;
-            this.BusinessClassSeatsTextBox.Size = new System.Drawing.Size(195, 27);
-            this.BusinessClassSeatsTextBox.TabIndex = 52;
+            BusinessClassSeatsTextBox.BorderStyle = BorderStyle.FixedSingle;
+            BusinessClassSeatsTextBox.Location = new Point(176, 295);
+            BusinessClassSeatsTextBox.Margin = new Padding(3, 2, 3, 2);
+            BusinessClassSeatsTextBox.Name = "BusinessClassSeatsTextBox";
+            BusinessClassSeatsTextBox.ReadOnly = true;
+            BusinessClassSeatsTextBox.Size = new Size(171, 23);
+            BusinessClassSeatsTextBox.TabIndex = 52;
             // 
             // arrivalTimeLabel
             // 
-            this.arrivalTimeLabel.AutoSize = true;
-            this.arrivalTimeLabel.Location = new System.Drawing.Point(15, 267);
-            this.arrivalTimeLabel.Name = "arrivalTimeLabel";
-            this.arrivalTimeLabel.Size = new System.Drawing.Size(89, 20);
-            this.arrivalTimeLabel.TabIndex = 46;
-            this.arrivalTimeLabel.Text = "Arrival Time";
+            arrivalTimeLabel.AutoSize = true;
+            arrivalTimeLabel.Location = new Point(13, 200);
+            arrivalTimeLabel.Name = "arrivalTimeLabel";
+            arrivalTimeLabel.Size = new Size(70, 15);
+            arrivalTimeLabel.TabIndex = 46;
+            arrivalTimeLabel.Text = "Arrival Time";
             // 
             // businessClassSeatsLabel
             // 
-            this.businessClassSeatsLabel.AutoSize = true;
-            this.businessClassSeatsLabel.Location = new System.Drawing.Point(14, 400);
-            this.businessClassSeatsLabel.Name = "businessClassSeatsLabel";
-            this.businessClassSeatsLabel.Size = new System.Drawing.Size(140, 20);
-            this.businessClassSeatsLabel.TabIndex = 51;
-            this.businessClassSeatsLabel.Text = "Business Class Seats";
+            businessClassSeatsLabel.AutoSize = true;
+            businessClassSeatsLabel.Location = new Point(12, 300);
+            businessClassSeatsLabel.Name = "businessClassSeatsLabel";
+            businessClassSeatsLabel.Size = new Size(112, 15);
+            businessClassSeatsLabel.TabIndex = 51;
+            businessClassSeatsLabel.Text = "Business Class Seats";
             // 
             // departureTimeLabel
             // 
-            this.departureTimeLabel.AutoSize = true;
-            this.departureTimeLabel.Location = new System.Drawing.Point(15, 224);
-            this.departureTimeLabel.Name = "departureTimeLabel";
-            this.departureTimeLabel.Size = new System.Drawing.Size(113, 20);
-            this.departureTimeLabel.TabIndex = 45;
-            this.departureTimeLabel.Text = "Departure Time";
+            departureTimeLabel.AutoSize = true;
+            departureTimeLabel.Location = new Point(13, 168);
+            departureTimeLabel.Name = "departureTimeLabel";
+            departureTimeLabel.Size = new Size(88, 15);
+            departureTimeLabel.TabIndex = 45;
+            departureTimeLabel.Text = "Departure Time";
             // 
             // aircraftLabel
             // 
-            this.aircraftLabel.AutoSize = true;
-            this.aircraftLabel.Location = new System.Drawing.Point(15, 356);
-            this.aircraftLabel.Name = "aircraftLabel";
-            this.aircraftLabel.Size = new System.Drawing.Size(58, 20);
-            this.aircraftLabel.TabIndex = 43;
-            this.aircraftLabel.Text = "Aircraft";
+            aircraftLabel.AutoSize = true;
+            aircraftLabel.Location = new Point(13, 267);
+            aircraftLabel.Name = "aircraftLabel";
+            aircraftLabel.Size = new Size(46, 15);
+            aircraftLabel.TabIndex = 43;
+            aircraftLabel.Text = "Aircraft";
             // 
             // CostTextBox
             // 
-            this.CostTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.CostTextBox.Location = new System.Drawing.Point(201, 168);
-            this.CostTextBox.Name = "CostTextBox";
-            this.CostTextBox.ReadOnly = true;
-            this.CostTextBox.Size = new System.Drawing.Size(195, 27);
-            this.CostTextBox.TabIndex = 42;
+            CostTextBox.BorderStyle = BorderStyle.FixedSingle;
+            CostTextBox.Location = new Point(176, 126);
+            CostTextBox.Margin = new Padding(3, 2, 3, 2);
+            CostTextBox.Name = "CostTextBox";
+            CostTextBox.ReadOnly = true;
+            CostTextBox.Size = new Size(171, 23);
+            CostTextBox.TabIndex = 42;
             // 
             // costLabel
             // 
-            this.costLabel.AutoSize = true;
-            this.costLabel.Location = new System.Drawing.Point(15, 170);
-            this.costLabel.Name = "costLabel";
-            this.costLabel.Size = new System.Drawing.Size(38, 20);
-            this.costLabel.TabIndex = 41;
-            this.costLabel.Text = "Cost";
+            costLabel.AutoSize = true;
+            costLabel.Location = new Point(13, 128);
+            costLabel.Name = "costLabel";
+            costLabel.Size = new Size(31, 15);
+            costLabel.TabIndex = 41;
+            costLabel.Text = "Cost";
             // 
             // DestinationTextBox
             // 
-            this.DestinationTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.DestinationTextBox.Location = new System.Drawing.Point(201, 126);
-            this.DestinationTextBox.Name = "DestinationTextBox";
-            this.DestinationTextBox.ReadOnly = true;
-            this.DestinationTextBox.Size = new System.Drawing.Size(195, 27);
-            this.DestinationTextBox.TabIndex = 30;
+            DestinationTextBox.BorderStyle = BorderStyle.FixedSingle;
+            DestinationTextBox.Location = new Point(176, 94);
+            DestinationTextBox.Margin = new Padding(3, 2, 3, 2);
+            DestinationTextBox.Name = "DestinationTextBox";
+            DestinationTextBox.ReadOnly = true;
+            DestinationTextBox.Size = new Size(171, 23);
+            DestinationTextBox.TabIndex = 30;
             // 
             // flightNumberLabel
             // 
-            this.flightNumberLabel.AutoSize = true;
-            this.flightNumberLabel.Location = new System.Drawing.Point(15, 35);
-            this.flightNumberLabel.Name = "flightNumberLabel";
-            this.flightNumberLabel.Size = new System.Drawing.Size(104, 20);
-            this.flightNumberLabel.TabIndex = 25;
-            this.flightNumberLabel.Text = "Flight Number";
+            flightNumberLabel.AutoSize = true;
+            flightNumberLabel.Location = new Point(13, 26);
+            flightNumberLabel.Name = "flightNumberLabel";
+            flightNumberLabel.Size = new Size(84, 15);
+            flightNumberLabel.TabIndex = 25;
+            flightNumberLabel.Text = "Flight Number";
             // 
             // FlightNumberTextBox
             // 
-            this.FlightNumberTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.FlightNumberTextBox.Location = new System.Drawing.Point(200, 33);
-            this.FlightNumberTextBox.Name = "FlightNumberTextBox";
-            this.FlightNumberTextBox.ReadOnly = true;
-            this.FlightNumberTextBox.Size = new System.Drawing.Size(196, 27);
-            this.FlightNumberTextBox.TabIndex = 26;
+            FlightNumberTextBox.BorderStyle = BorderStyle.FixedSingle;
+            FlightNumberTextBox.Location = new Point(175, 25);
+            FlightNumberTextBox.Margin = new Padding(3, 2, 3, 2);
+            FlightNumberTextBox.Name = "FlightNumberTextBox";
+            FlightNumberTextBox.ReadOnly = true;
+            FlightNumberTextBox.Size = new Size(172, 23);
+            FlightNumberTextBox.TabIndex = 26;
             // 
             // destinationLabel
             // 
-            this.destinationLabel.AutoSize = true;
-            this.destinationLabel.Location = new System.Drawing.Point(15, 128);
-            this.destinationLabel.Name = "destinationLabel";
-            this.destinationLabel.Size = new System.Drawing.Size(85, 20);
-            this.destinationLabel.TabIndex = 29;
-            this.destinationLabel.Text = "Destination";
+            destinationLabel.AutoSize = true;
+            destinationLabel.Location = new Point(13, 96);
+            destinationLabel.Name = "destinationLabel";
+            destinationLabel.Size = new Size(67, 15);
+            destinationLabel.TabIndex = 29;
+            destinationLabel.Text = "Destination";
             // 
             // originLabel
             // 
-            this.originLabel.AutoSize = true;
-            this.originLabel.Location = new System.Drawing.Point(15, 80);
-            this.originLabel.Name = "originLabel";
-            this.originLabel.Size = new System.Drawing.Size(50, 20);
-            this.originLabel.TabIndex = 27;
-            this.originLabel.Text = "Origin";
+            originLabel.AutoSize = true;
+            originLabel.Location = new Point(13, 60);
+            originLabel.Name = "originLabel";
+            originLabel.Size = new Size(40, 15);
+            originLabel.TabIndex = 27;
+            originLabel.Text = "Origin";
             // 
             // OriginTextBox
             // 
-            this.OriginTextBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.OriginTextBox.Location = new System.Drawing.Point(200, 78);
-            this.OriginTextBox.Name = "OriginTextBox";
-            this.OriginTextBox.ReadOnly = true;
-            this.OriginTextBox.Size = new System.Drawing.Size(196, 27);
-            this.OriginTextBox.TabIndex = 28;
+            OriginTextBox.BorderStyle = BorderStyle.FixedSingle;
+            OriginTextBox.Location = new Point(175, 58);
+            OriginTextBox.Margin = new Padding(3, 2, 3, 2);
+            OriginTextBox.Name = "OriginTextBox";
+            OriginTextBox.ReadOnly = true;
+            OriginTextBox.Size = new Size(172, 23);
+            OriginTextBox.TabIndex = 28;
             // 
             // FlightsListBox
             // 
-            this.FlightsListBox.FormattingEnabled = true;
-            this.FlightsListBox.ItemHeight = 20;
-            this.FlightsListBox.Location = new System.Drawing.Point(12, 32);
-            this.FlightsListBox.Name = "FlightsListBox";
-            this.FlightsListBox.Size = new System.Drawing.Size(402, 464);
-            this.FlightsListBox.TabIndex = 1;
-            this.FlightsListBox.SelectedIndexChanged += new System.EventHandler(this.FlightsListBox_SelectedIndexChanged);
+            FlightsListBox.FormattingEnabled = true;
+            FlightsListBox.ItemHeight = 15;
+            FlightsListBox.Location = new Point(10, 24);
+            FlightsListBox.Margin = new Padding(3, 2, 3, 2);
+            FlightsListBox.Name = "FlightsListBox";
+            FlightsListBox.Size = new Size(352, 349);
+            FlightsListBox.TabIndex = 1;
+            FlightsListBox.SelectedIndexChanged += FlightsListBox_SelectedIndexChanged;
             // 
             // ModifyButton
             // 
-            this.ModifyButton.BackColor = System.Drawing.Color.DarkGray;
-            this.ModifyButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ModifyButton.Location = new System.Drawing.Point(714, 508);
-            this.ModifyButton.Name = "ModifyButton";
-            this.ModifyButton.Size = new System.Drawing.Size(117, 36);
-            this.ModifyButton.TabIndex = 36;
-            this.ModifyButton.Text = "Modify";
-            this.ModifyButton.UseVisualStyleBackColor = false;
-            this.ModifyButton.Click += new System.EventHandler(this.ModifyButton_Click);
+            ModifyButton.BackColor = Color.DarkGray;
+            ModifyButton.ForeColor = SystemColors.ActiveCaptionText;
+            ModifyButton.Location = new Point(495, 363);
+            ModifyButton.Margin = new Padding(3, 2, 3, 2);
+            ModifyButton.Name = "ModifyButton";
+            ModifyButton.Size = new Size(118, 27);
+            ModifyButton.TabIndex = 36;
+            ModifyButton.Text = "Modify";
+            ModifyButton.UseVisualStyleBackColor = false;
             // 
             // CancelFlightButton
             // 
-            this.CancelFlightButton.BackColor = System.Drawing.Color.Red;
-            this.CancelFlightButton.ForeColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.CancelFlightButton.Location = new System.Drawing.Point(578, 508);
-            this.CancelFlightButton.Name = "CancelFlightButton";
-            this.CancelFlightButton.Size = new System.Drawing.Size(130, 36);
-            this.CancelFlightButton.TabIndex = 35;
-            this.CancelFlightButton.Text = "CANCEL FLIGHT";
-            this.CancelFlightButton.UseVisualStyleBackColor = false;
+            CancelFlightButton.BackColor = Color.Red;
+            CancelFlightButton.ForeColor = SystemColors.ButtonHighlight;
+            CancelFlightButton.Location = new Point(375, 363);
+            CancelFlightButton.Margin = new Padding(3, 2, 3, 2);
+            CancelFlightButton.Name = "CancelFlightButton";
+            CancelFlightButton.Size = new Size(114, 27);
+            CancelFlightButton.TabIndex = 35;
+            CancelFlightButton.Text = "CANCEL FLIGHT";
+            CancelFlightButton.UseVisualStyleBackColor = false;
             // 
             // AddFlightButton
             // 
-            this.AddFlightButton.BackColor = System.Drawing.Color.DarkGray;
-            this.AddFlightButton.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.AddFlightButton.Location = new System.Drawing.Point(443, 508);
-            this.AddFlightButton.Name = "AddFlightButton";
-            this.AddFlightButton.Size = new System.Drawing.Size(117, 36);
-            this.AddFlightButton.TabIndex = 37;
-            this.AddFlightButton.Text = "Add Flight";
-            this.AddFlightButton.UseVisualStyleBackColor = false;
+            AddFlightButton.BackColor = Color.DarkGray;
+            AddFlightButton.ForeColor = SystemColors.ActiveCaptionText;
+            AddFlightButton.Location = new Point(619, 363);
+            AddFlightButton.Margin = new Padding(3, 2, 3, 2);
+            AddFlightButton.Name = "AddFlightButton";
+            AddFlightButton.Size = new Size(102, 27);
+            AddFlightButton.TabIndex = 37;
+            AddFlightButton.Text = "Add Flight";
+            AddFlightButton.UseVisualStyleBackColor = false;
+            // 
+            // CancelReplyMessageLabel
+            // 
+            CancelReplyMessageLabel.AutoSize = true;
+            CancelReplyMessageLabel.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            CancelReplyMessageLabel.Location = new Point(375, 392);
+            CancelReplyMessageLabel.Name = "CancelReplyMessageLabel";
+            CancelReplyMessageLabel.Size = new Size(0, 13);
+            CancelReplyMessageLabel.TabIndex = 38;
+            // 
+            // ModifyReplyMessageLabel
+            // 
+            ModifyReplyMessageLabel.AutoSize = true;
+            ModifyReplyMessageLabel.Font = new Font("Segoe UI", 8F, FontStyle.Regular, GraphicsUnit.Point);
+            ModifyReplyMessageLabel.Location = new Point(499, 392);
+            ModifyReplyMessageLabel.Name = "ModifyReplyMessageLabel";
+            ModifyReplyMessageLabel.Size = new Size(0, 13);
+            ModifyReplyMessageLabel.TabIndex = 39;
             // 
             // ManageFlights
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(843, 550);
-            this.Controls.Add(this.AddFlightButton);
-            this.Controls.Add(this.ModifyButton);
-            this.Controls.Add(this.CancelFlightButton);
-            this.Controls.Add(this.FlightsListBox);
-            this.Controls.Add(this.FlightBox);
-            this.Name = "ManageFlights";
-            this.Text = "ManageFlights";
-            this.FlightBox.ResumeLayout(false);
-            this.FlightBox.PerformLayout();
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(738, 412);
+            Controls.Add(ModifyReplyMessageLabel);
+            Controls.Add(CancelReplyMessageLabel);
+            Controls.Add(AddFlightButton);
+            Controls.Add(ModifyButton);
+            Controls.Add(CancelFlightButton);
+            Controls.Add(FlightsListBox);
+            Controls.Add(FlightBox);
+            Margin = new Padding(3, 2, 3, 2);
+            Name = "ManageFlights";
+            Text = "ManageFlights";
+            FlightBox.ResumeLayout(false);
+            FlightBox.PerformLayout();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -356,5 +394,7 @@
         private Button CancelFlightButton;
         private TextBox AircraftTextBox;
         private Button AddFlightButton;
+        private Label CancelReplyMessageLabel;
+        private Label ModifyReplyMessageLabel;
     }
 }
