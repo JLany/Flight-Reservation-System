@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -127,6 +128,12 @@ namespace FlightReservationUI
                 valid = false;
             }
 
+            if (!IsValidEmail(emailTextBox.Text))
+            {
+                errorLabel.Text = "Invalid email.";
+                valid = false;
+            }
+
             if (passportNumberTextBox.Text.Length < 1)
             {
                 errorLabel.Text = "Passport number too short.";
@@ -158,6 +165,13 @@ namespace FlightReservationUI
             }
 
             return valid;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            var validEmail = new 
+                Regex("^[\\w!#$%&'*+/=?^`{|}~-]+(\\.[\\w!#$%&'*+/=?^`{|}~-]+)*@(?:[\\w-]+\\.)+[a-zA-Z]{2,63}$");
+            return validEmail.IsMatch(email);
         }
     }
 }
