@@ -12,25 +12,36 @@ namespace FlightReservationUI
 {
     public partial class AdminMainForm : Form
     {
+        bool hasChildren = false;
         public AdminMainForm()
         {
             InitializeComponent();
 
             ManageAircraftsButton.Click += ManageAircraftsButton_Click;
             ManageFlightsButton.Click += ManageFlightsButton_Click;
-            
+            this.FormClosed += AdminMainForm_FormClosed;
+        }
+
+        private void AdminMainForm_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            if (!hasChildren)
+            {
+                new LoginForm().Show();
+            }
         }
 
         private void ManageFlightsButton_Click(object? sender, EventArgs e)
         {
-            // Redirect to Manage Flights Form
-            throw new NotImplementedException();
+            new ManageFlights().Show();
+            hasChildren = true;
+            this.Close();
         }
 
         private void ManageAircraftsButton_Click(object? sender, EventArgs e)
         {
-            // Redirect to Manage Aircrafts Form
-            throw new NotImplementedException();
+            new ManageAircrafts().Show();
+            hasChildren = true;
+            this.Close();
         }
     }
 }

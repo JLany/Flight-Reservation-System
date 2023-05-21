@@ -27,5 +27,10 @@ namespace FlightReservationUI.Communication
                 windowTitle,
                 MessageBoxButtons.YesNo) == DialogResult.Yes;
         }
+
+        public static void RemoveLabelText(Label label)
+        {
+            label.Text = "";
+        }
     }
 }

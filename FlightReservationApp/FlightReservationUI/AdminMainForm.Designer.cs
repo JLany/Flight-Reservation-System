@@ -41,7 +41,6 @@
             this.ManageAircraftsButton.TabIndex = 0;
             this.ManageAircraftsButton.Text = "Manage Aircrafts";
             this.ManageAircraftsButton.UseVisualStyleBackColor = true;
-            this.ManageAircraftsButton.Click += new System.EventHandler(this.ManageAircraftsButton_Click);
             // 
             // ManageFlightsButton
             // 
