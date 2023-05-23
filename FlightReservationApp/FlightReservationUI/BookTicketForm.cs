@@ -73,8 +73,8 @@ namespace FlightReservationUI
             // aquire data from fields (build a ticket)
             var selectedFlight = (FlightModel)flightsListBox.SelectedItem;
 
-            var ticketNumber = currentCustomer.FirstName[0] + currentCustomer.MiddleName[0]
-                + currentCustomer.LastName[0] + selectedFlight.FlightNumber;
+            var ticketNumber = $"{currentCustomer.FirstName[0]} {currentCustomer.MiddleName[0]}" + 
+                $" {currentCustomer.LastName[0]} {selectedFlight.FlightNumber}";
 
             var ticket = new FlightTicketModel
             {
