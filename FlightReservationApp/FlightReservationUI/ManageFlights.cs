@@ -101,7 +101,7 @@ namespace FlightReservationUI
             ArrivalTimePicker.Value = flight.ArrivalTime;
 
             // this throws an exception
-            /*AircraftTextBox.Text = (((AircaftModel)flight.Aircaft).PartialModelData);*/
+            AircraftTextBox.Text = (((AircaftModel)flight.Aircaft).PartialModelData);
 
             TripDurationTextBox.Text = flight.TripDuration.ToString();
             BusinessClassSeatsTextBox.Text = flight.BusinessClassSeats.ToString();

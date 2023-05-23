@@ -470,6 +470,9 @@ namespace FlightReservationLibrary.DataAccess
             {
                 Flights =
                     connection.Query<FlightModel>("SELECT * FROM Flight").ToList();
+
+                foreach(var flight in Flights)
+                    flight.Aircaft = GetAircraft_ByFlight(flight, connection);
             }
 
             return Flights;
