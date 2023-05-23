@@ -22,7 +22,7 @@ namespace FlightReservationLibrary.Models
 
         public string FullModelData
         {
-            get => $"{Id} - {SerialNumber} - {ModelName} - {NumberOfSeats} Seats";
+            get => $"{SerialNumber} - {ModelName} - {NumberOfSeats} Seats";
         }
     }
 

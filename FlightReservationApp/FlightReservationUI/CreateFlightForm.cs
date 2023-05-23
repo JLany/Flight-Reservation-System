@@ -110,19 +110,19 @@ namespace FlightReservationUI
                 return false;
             }
 
-            if (flightNumberTextBox.Text == "")
+            if (flightNumberTextBox.Text.Length < 1 || flightNumberTextBox.Text.Length > 20)
             {
                 MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "Invalid Flight Number");
                 return false;
             }
 
-            if (originTextBox.Text.Length < 2 || originTextBox.Text.Length > 60)
+            if (originTextBox.Text.Length < 2 || originTextBox.Text.Length > 10)
             {
                 MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "Invalid Origin Country");
                 return false;
             }
 
-            if (destinationTextBox.Text.Length < 2 || destinationTextBox.Text.Length > 60)
+            if (destinationTextBox.Text.Length < 2 || destinationTextBox.Text.Length > 10)
             {
                 MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "Invalid Destination Country");
                 return false;

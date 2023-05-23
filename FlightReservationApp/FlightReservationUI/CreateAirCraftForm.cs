@@ -59,7 +59,7 @@ namespace FlightReservationUI
                 return false;
             }
 
-            if (modelTextBox.Text.Length < 4 || modelTextBox.Text.Length > 40)
+            if (modelTextBox.Text.Length < 4 || modelTextBox.Text.Length > 50)
             {
                 MessageController.DisplayLabelErrorMessage(ReplyMessageLabel, "ModelName is not valid");
                 return false;
