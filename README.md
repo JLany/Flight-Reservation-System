@@ -1,1 +1,9 @@
-# ALWAYS CREATE A BRANCH FOR THE NEW FEATURE YOU ADDED, OR THE BUG YOU FIXED OR EVEN FOR THE SMALL MODIFICATION YOU MADE!
+# Flight Reservation System
+
+Desktop flight booking app. Using C#, Winforms, SQL Server.
+
+## Built by:
+  + Mohammed El-Adawy
+  + Shehab Diab
+  + Yousef Badr
+  + Kilany
